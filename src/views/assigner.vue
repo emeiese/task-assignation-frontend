@@ -1,47 +1,59 @@
 <template>
   <div class="w-full flex flex-col m-10 items-center mx-auto">
-    <h1 class="p-3">
-      Ingrese todas las personas que participan de las tareas, separadas por
-      comas.
-    </h1>
-    <div class="relative flex w-1/2 flex-wrap items-stretch mb-3">
-      <input
-        id="namesInput"
-        type="text"
-        v-model="names"
-        placeholder="Ejemplo: Josefa, Tomás, Ignacio, María"
-        class="px-3 py-3 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-sm border-0 shadow outline-none focus:outline-none focus:ring w-full pr-10"
-      />
-      <span
-        class="z-10 h-full leading-snug font-normal absolute text-center text-blueGray-300 absolute bg-transparent rounded text-base items-center justify-center w-8 right-0 pr-3 py-3"
-      >
-        <i class="fas fa-user"></i>
-      </span>
-    </div>
-    <button
-      class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
-      @click="saveNames()"
+    <input-and-save
+      id="namesInput"
+      upperString="Ingrese todas las personas que participan de las tareas, separadas por comas."
+      placeholder="Ejemplo: Josefa, Tomás, Ignacio, María"
+      saveString="Guardar personas"
+      @save-objects="saveNames($event)"
     >
-      Guardar
-    </button>
+    </input-and-save>
+    <input-and-save
+      id="shoresInput"
+      upperString="Ingrese todas las tareas a asignar, separadas por comas."
+      placeholder="Ejemplo: lavar, cocinar, limpiar"
+      saveString="Guardar tareas"
+      @save-objects="saveShores($event)"
+    ></input-and-save>
+    <input-and-save
+      id="periodsInput"
+      upperString="Ingrese los días de la semana en los que las tareas se asignan a las personas"
+      placeholder="Ejemplo: Lunes, Martes, Miércoles, Jueves, Viernes, Sábado, Domingo"
+      saveString="Guardar días"
+    ></input-and-save>
+    <div class="flex-col absolute bottom-0 items-center">
+      <img
+        class=""
+        alt="Pikachu sprite"
+        src="../assets/pikachu_sprite.png"
+        title="Holi, soy un pikachu gordito"
+      />
+      <!-- <h3>
+        Made with love by https://github.com/emeiese
+      </h3> -->
+    </div>
   </div>
 </template>
 
 <script>
-//import multiple from '../components/multipleTags.vue';
+import inputAndSave from "../components/inputAndSave.vue";
 export default {
-  //components: { multiple }
+  components: { inputAndSave },
   data() {
     return {
       names: [],
+      shores: [],
       showShoreInput: false,
     };
   },
   methods: {
-    saveNames() {
-      const stringNames = document.getElementById("namesInput").value;
-      this.names = stringNames.split(",").map((name) => name.trim());
+    saveNames(objects) {
+      this.names = objects.split(",").map((name) => name.trim());
       console.log(this.names);
+    },
+    saveShores(objects) {
+      this.shores = objects.split(",").map((shore) => shore.trim());
+      console.log(this.shores);
     },
   },
 };

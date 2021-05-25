@@ -1,14 +1,13 @@
 <template>
-  <h1 class="p-3">
-    Ingrese todas las personas que participan de las tareas, separadas por
-    comas.
+  <h1 class="pt-10">
+    {{ upperString }}
   </h1>
-  <div class="relative flex w-1/2 flex-wrap items-stretch mb-3">
+  <div class="relative flex w-1/2 flex-wrap items-stretch mb-3 pt-2">
     <input
-      id="namesInput"
+      :id="id"
       type="text"
-      v-model="names"
-      placeholder="Ejemplo: Josefa, Tomás, Ignacio, María"
+      v-model="objects"
+      :placeholder="placeholder"
       class="px-3 py-3 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-sm border-0 shadow outline-none focus:outline-none focus:ring w-full pr-10"
     />
     <span
@@ -19,9 +18,9 @@
   </div>
   <button
     class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
-    @click="saveNames()"
+    @click="$emit('save-objects', objects)"
   >
-    Guardar
+    {{ saveString }}
   </button>
 </template>
 
@@ -30,19 +29,15 @@ export default {
   props: {
     upperString: String,
     placeholder: String,
+    saveString: String,
+    id: String,
   },
-  data() {
-    return {
-      names: [],
-      showShoreInput: false,
-    };
-  },
-  methods: {
+  /*methods: {
     saveNames() {
-      const stringNames = document.getElementById("namesInput").value;
-      this.names = stringNames.split(",").map((name) => name.trim());
-      console.log(this.names);
+      const stringObjects = document.getElementById(id).value;
+      this.objects = stringObjects.split(",").map((name) => name.trim());
+      console.log(this.objects);
     },
-  },
+  },*/
 };
 </script>

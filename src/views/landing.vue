@@ -1,5 +1,5 @@
 <template>
-    <div class="w-full flex flex-col">
+  <div class="w-full flex flex-col pt-10">
     <div
       class="p-10 relative mx-auto bg-blue-100 items-center rounded-md border-4 border-blue-500"
     >
@@ -27,19 +27,19 @@
       </div>
     </div>
   </div>
+  <TheFooter/>
 </template>
 
 <script>
 // import HelloWorld from "./components/HelloWorld.vue";
+import TheFooter from "../components/TheFooter.vue";
 
 export default {
   name: "App",
   components: {
-    // HelloWorld,
+    TheFooter,
   },
 };
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

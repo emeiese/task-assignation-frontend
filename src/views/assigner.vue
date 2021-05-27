@@ -23,7 +23,7 @@
     ></input-and-save>
     <div class="flex flex-row pt-28 pb-10 space-x-10">
       <label class="text-gray-700">
-        <input type="radio" value="" ref="restrictionsSelected" />
+        <input type="radio" value="" ref="restrictionsSelected" v-model="eqRestrictions"/>
         <span class="ml-1"
           >Deseo agregar
           <Tooltip
@@ -36,7 +36,7 @@
         </span>
       </label>
       <label class="text-gray-700">
-        <input type="radio" value="" ref="costsSelected" />
+        <input type="radio" value="" ref="costsSelected" v-model="assignCosts"/>
         <span class="ml-1"
           >Deseo agregar
           <Tooltip
@@ -51,20 +51,21 @@
         >
       </label>
     </div>
-    <button
+    <router-link
       class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
-      @click="
-        $emit('save-all', {
+      :to="{
+        path: '/assigner/costs',
+        query: {
           names: names,
           shores: shores,
           days: days,
           eqRestrictions: eqRestrictions,
           assignCosts: assignCosts,
-        })
-      "
+        },
+      }"
     >
       Continuar
-    </button>
+    </router-link>
   </div>
   <TheFooter />
 </template>

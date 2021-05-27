@@ -39,7 +39,7 @@ export default {
   padding: 10px 10px;
   border-radius: 10px;
   
-  width: 300px;
+  width: 500px;
   bottom: 100%;
   left: 50%;
   margin-left: -200px;

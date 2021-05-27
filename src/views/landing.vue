@@ -7,7 +7,7 @@
         <img
           class="bg-blue-500 border-8 border-blue-500 w-1/6 rounded-full"
           alt="Pikachu logo"
-          src="../assets/pikachu.jpg"
+          src="../assets/whale.png"
         />
       </div>
       <div class="bg-blue-500 rounded-full">

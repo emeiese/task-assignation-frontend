@@ -77,6 +77,7 @@ export default {
     assignCosts: Boolean,
   },
   data() {
+    // El frontend debería comunicarle la lista de tareas al backend para que el backend retorne un diccionario que sean las opciones. 
     return {
       options: [
         {

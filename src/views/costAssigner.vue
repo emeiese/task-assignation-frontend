@@ -19,7 +19,7 @@
       </span>
       <span class="font-semibold text-red-300">
         La suma de los costos para una persona debe ser de exactamente
-        {{ shores.length }}
+        {{ tasks.length }}
       </span>
     </div>
     <div
@@ -27,11 +27,11 @@
     >
       <div v-for="name in names" :key="name" class="px-3 py-3">
         <div
-          v-for="shore in shores"
-          :key="shore"
+          v-for="task in tasks"
+          :key="task"
           class="py-3 flex flex-row items-center justify-between font-mono text-sm"
         >
-          Costo de {{ name }} por {{ shore }}:
+          Costo de {{ name }} por {{ task }}:
           <select
             class="bg-white flex w-12 h-8 text-xs border  border-gray-200 text-blue-500 rounded-md focus:ring"
           >
@@ -52,7 +52,7 @@
         path: '/assigner/costs/restrictions',
         query: {
           names: names,
-          shores: shores,
+          tasks: tasks,
           days: days,
           eqRestrictions: eqRestrictions,
           assignCosts: assignCosts,
@@ -71,7 +71,7 @@ export default {
   components: { TheFooter },
   props: {
     names: Array,
-    shores: Array,
+    tasks: Array,
     days: Array,
     eqRestrictions: Boolean,
     assignCosts: Boolean,

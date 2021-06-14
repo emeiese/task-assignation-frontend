@@ -9,17 +9,18 @@
     >
     </input-and-save>
     <input-and-save
-      id="shoresInput"
+      id="tasksInput"
       upperString="Ingrese todas las tareas a asignar, separadas por comas."
       placeholder="Ejemplo: lavar, cocinar, limpiar"
       saveString="Guardar tareas"
-      @save-objects="saveShores($event)"
+      @save-objects="saveTasks($event)"
     ></input-and-save>
     <input-and-save
       id="periodsInput"
       upperString="Ingrese los días de la semana en los que las tareas se asignan a las personas"
       placeholder="Ejemplo: Lunes, Martes, Miércoles, Jueves, Viernes, Sábado, Domingo"
       saveString="Guardar días"
+      @save-objects="saveDays($event)"
     ></input-and-save>
     <div class="flex flex-row pt-28 pb-10 space-x-10">
       <label class="text-gray-700">
@@ -57,7 +58,7 @@
         path: '/assigner/costs',
         query: {
           names: names,
-          shores: shores,
+          tasks: tasks,
           days: days,
           eqRestrictions: eqRestrictions,
           assignCosts: assignCosts,
@@ -80,7 +81,7 @@ export default {
   data() {
     return {
       names: ["Josefa", "Tomás", "Ignacio", "María"],
-      shores: ["lavar", "cocinar", "limpiar"],
+      tasks: ["lavar", "cocinar", "limpiar"],
       days: [
         "Lunes",
         "Martes",
@@ -99,9 +100,13 @@ export default {
       this.names = objects.split(",").map((name) => name.trim());
       console.log(this.names);
     },
-    saveShores(objects) {
-      this.shores = objects.split(",").map((shore) => shore.trim());
-      console.log(this.shores);
+    saveTasks(objects) {
+      this.tasks = objects.split(",").map((task) => task.trim());
+      console.log(this.tasks);
+    },
+    saveDays(objects) {
+      this.days = objects.split(",").map((day) => day.trim());
+      console.log(this.days);
     },
   },
 };

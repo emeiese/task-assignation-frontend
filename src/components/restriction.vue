@@ -61,7 +61,7 @@ export default {
           value: 4,
         },
       ],
-      shoresRepetition: false,
+      tasksRepetition: false,
     };
   },
 };

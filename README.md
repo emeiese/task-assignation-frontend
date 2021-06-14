@@ -1,4 +1,4 @@
-# shore-assign-front
+# task-assign-front
 
 ## Project setup
 ```

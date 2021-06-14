@@ -8,7 +8,7 @@
 export default {
   props: {
     names: Array,
-    shores: Array,
+    tasks: Array,
     days: Array,
     eqRestrictions: Boolean,
     assignCosts: Boolean,

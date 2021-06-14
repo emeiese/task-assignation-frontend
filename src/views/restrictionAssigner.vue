@@ -26,7 +26,7 @@
         path: '/optimize',
         query: {
           names: names,
-          shores: shores,
+          tasks: tasks,
           days: days,
         },
       }"
@@ -41,7 +41,7 @@ import restriction from "../components/restriction.vue";
 export default {
   props: {
     names: Array,
-    shores: Array,
+    tasks: Array,
     days: Array,
   },
   components: { restriction },

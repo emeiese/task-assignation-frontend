@@ -23,7 +23,7 @@ const routes = [
     props(route) {
       return {
         names: route.query.names,
-        shores: route.query.shores,
+        tasks: route.query.tasks,
         days: route.query.days,
         eqRestrictions: route.query.eqRestrictions,
         assignCosts: route.query.assignCosts,
@@ -37,7 +37,7 @@ const routes = [
     props(route) {
       return {
         names: route.query.names,
-        shores: route.query.shores,
+        tasks: route.query.tasks,
         days: route.query.days,
         eqRestrictions: route.query.eqRestrictions,
         assignCosts: route.query.assignCosts,
@@ -51,7 +51,7 @@ const routes = [
     props(route) {
       return {
         names: route.query.names,
-        shores: route.query.shores,
+        tasks: route.query.tasks,
         days: route.query.days,
       };
     },

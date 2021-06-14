@@ -24,7 +24,12 @@
     ></input-and-save>
     <div class="flex flex-row pt-28 pb-10 space-x-10">
       <label class="text-gray-700">
-        <input type="radio" value="" ref="restrictionsSelected" v-model="eqRestrictions"/>
+        <input
+          type="radio"
+          value=""
+          ref="restrictionsSelected"
+          v-model="eqRestrictions"
+        />
         <span class="ml-1"
           >Deseo agregar
           <Tooltip
@@ -37,7 +42,12 @@
         </span>
       </label>
       <label class="text-gray-700">
-        <input type="radio" value="" ref="costsSelected" v-model="assignCosts"/>
+        <input
+          type="radio"
+          value=""
+          ref="costsSelected"
+          v-model="assignCosts"
+        />
         <span class="ml-1"
           >Deseo agregar
           <Tooltip
@@ -72,6 +82,7 @@
 </template>
 
 <script>
+import axios from "axios";
 import inputAndSave from "../components/inputAndSave.vue";
 import TheFooter from "../components/TheFooter.vue";
 import Tooltip from "../components/SimpleTooltip.vue";
@@ -93,20 +104,27 @@ export default {
       ],
       eqRestrictions: false,
       assignCosts: false,
+      costsList: ['hola'],
     };
   },
   methods: {
+    async get_tasks_cost() {
+      let post = {
+        tasks: this.tasks,
+      };
+      const response = await axios.post("http://localhost:8000/getOptions/", post);
+      this.costsList = response.data;
+    },
     saveNames(objects) {
       this.names = objects.split(",").map((name) => name.trim());
       console.log(this.names);
     },
     saveTasks(objects) {
       this.tasks = objects.split(",").map((task) => task.trim());
-      console.log(this.tasks);
+      this.get_tasks_cost();
     },
     saveDays(objects) {
       this.days = objects.split(",").map((day) => day.trim());
-      console.log(this.days);
     },
   },
 };

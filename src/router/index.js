@@ -25,8 +25,8 @@ const routes = [
         names: route.query.names,
         tasks: route.query.tasks,
         days: route.query.days,
-        eqRestrictions: route.query.eqRestrictions,
-        assignCosts: route.query.assignCosts,
+        eqRestrictions: Boolean(route.query.eqRestrictions),
+        assignCosts: Boolean(route.query.assignCosts),
       };
     },
   },
@@ -39,8 +39,8 @@ const routes = [
         names: route.query.names,
         tasks: route.query.tasks,
         days: route.query.days,
-        eqRestrictions: route.query.eqRestrictions,
-        assignCosts: route.query.assignCosts,
+        eqRestrictions: Boolean(route.query.eqRestrictions),
+        assignCosts: Boolean(route.query.assignCosts),
       };
     },
   },

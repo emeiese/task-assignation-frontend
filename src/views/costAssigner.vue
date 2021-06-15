@@ -33,6 +33,8 @@
         >
           Costo de {{ name }} por {{ task }}:
           <select
+            v-model="costs[name][task]"
+            @click="checkCosts()"
             class="bg-white flex w-12 h-8 text-xs border  border-gray-200 text-blue-500 rounded-md focus:ring"
           >
             <option
@@ -48,6 +50,7 @@
     </div>
     <router-link
       class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+      :class="canContinue ? 'bg-green-500' : 'bg-red-500'"
       :to="{
         path: '/assigner/costs/restrictions',
         query: {
@@ -61,12 +64,19 @@
     >
       Continuar
     </router-link>
+    <button
+      class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+      @click="checkCosts()"
+    >
+      Revisar Costos
+    </button>
   </div>
-  <the-footer/>
+  <the-footer />
 </template>
 
 <script>
-import TheFooter from '../components/TheFooter.vue';
+import axios from "axios";
+import TheFooter from "../components/TheFooter.vue";
 export default {
   components: { TheFooter },
   props: {
@@ -77,27 +87,35 @@ export default {
     assignCosts: Boolean,
   },
   data() {
-    // El frontend debería comunicarle la lista de tareas al backend para que el backend retorne un diccionario que sean las opciones. 
     return {
-      options: [
-        {
-          text: "1",
-          value: 1,
-        },
-        {
-          text: "2",
-          value: 2,
-        },
-        {
-          text: "3",
-          value: 3,
-        },
-        {
-          text: "4",
-          value: 4,
-        },
-      ],
+      options: [],
+      costs: Object.fromEntries(
+        this.names.map((x) => [
+          x,
+          Object.fromEntries(this.tasks.map((y) => [y, 1])),
+        ]),
+      ),
+      canContinue: true,
     };
+  },
+  methods: {
+    async checkCosts() {
+      let post = { costs: this.costs };
+      const response = await axios.post(
+        "http://localhost:8000/checkCosts/",
+        post
+      );
+      console.log(response.data);
+      this.canContinue = response.data;
+    },
+  },
+  async created() {
+    let post = { tasks: this.tasks };
+    const response = await axios.post(
+      "http://localhost:8000/getOptions/",
+      post
+    );
+    this.options = response.data;
   },
 };
 </script>

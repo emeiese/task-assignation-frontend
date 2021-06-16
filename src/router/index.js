@@ -22,11 +22,11 @@ const routes = [
     component: CostAssigner,
     props(route) {
       return {
-        names: route.query.names,
-        tasks: route.query.tasks,
-        days: route.query.days,
-        eqRestrictions: Boolean(route.query.eqRestrictions),
-        assignCosts: Boolean(route.query.assignCosts),
+        names: route.params.names,
+        tasks: route.params.tasks,
+        days: route.params.days,
+        eqRestrictions: Boolean(route.params.eqRestrictions),
+        assignCosts: Boolean(route.params.assignCosts),
       };
     },
   },
@@ -36,14 +36,23 @@ const routes = [
     component: RestrictionAssigner,
     props(route) {
       return {
-        names: route.query.names,
-        tasks: route.query.tasks,
-        days: route.query.days,
-        eqRestrictions: Boolean(route.query.eqRestrictions),
-        assignCosts: Boolean(route.query.assignCosts),
+        names: route.params.names,
+        tasks: route.params.tasks,
+        days: route.params.days,
+        eqRestrictions: Boolean(route.params.eqRestrictions),
+        assignCosts: Boolean(route.params.assignCosts),
+        costs: JSON.parse(route.params.costs),
       };
     },
   },
+  /*
+  {
+    path: "/assigner/costs/restrictions",
+    name: "RestrictionAssigner",
+    component: RestrictionAssigner,
+    props: true
+  },
+  */
   {
     path: "/optimize",
     name: "Optimizer",

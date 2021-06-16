@@ -62,21 +62,12 @@
         >
       </label>
     </div>
-    <router-link
+    <button
       class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
-      :to="{
-        path: '/assigner/costs',
-        query: {
-          names: names,
-          tasks: tasks,
-          days: days,
-          eqRestrictions: eqRestrictions,
-          assignCosts: assignCosts,
-        },
-      }"
+      @click="nextPage()"
     >
       Continuar
-    </router-link>
+    </button>
   </div>
   <TheFooter />
 </template>
@@ -114,6 +105,18 @@ export default {
     },
     saveDays(objects) {
       this.days = objects.split(",").map((day) => day.trim());
+    },
+    nextPage() {
+      this.$router.push({
+        name: "CostAssigner",
+        params: {
+          names: this.names,
+          tasks: this.tasks,
+          days: this.days,
+          eqRestrictions: this.eqRestrictions,
+          assignCosts: this.assignCosts,
+        },
+      });
     },
   },
 };

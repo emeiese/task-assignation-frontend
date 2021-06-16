@@ -20,6 +20,7 @@
       :tipText="rest.tipText"
       :restrictionsOptions="options"
     />
+
     <router-link
       class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
       :to="{
@@ -33,6 +34,14 @@
     >
       Continuar
     </router-link>
+    <!--
+    <button
+      class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+      @click="showNames()"
+    >
+      Next!
+    </button>
+    -->
   </div>
 </template>
 
@@ -43,8 +52,17 @@ export default {
     names: Array,
     tasks: Array,
     days: Array,
+    eqRestrictions: Boolean,
+    assignCosts: Boolean,
+    costs: Object,
   },
   components: { restriction },
+  methods: {
+    showNames() {
+      console.log(this.costs);
+      console.log(this.days);
+    },
+  },
   data() {
     // el frontend debería comunicarle al backend
     return {

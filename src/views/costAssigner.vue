@@ -48,8 +48,11 @@
         </div>
       </div>
     </div>
+    <!--
     <router-link
       class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+      tag="button"
+      :disabled="canContinue"
       :class="canContinue ? 'bg-green-500' : 'bg-red-500'"
       :to="{
         path: '/assigner/costs/restrictions',
@@ -63,12 +66,18 @@
       }"
     >
       Continuar
-    </router-link>
+    </router-link> -->
     <button
-      class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
-      @click="checkCosts()"
+      class="bg-transpareny font-semibold py-2 px-4 border rounded"
+      :class="
+        canContinue
+          ? 'hover:bg-blue-500 text-blue-700 hover:text-white border-blue-500 hover:border-transparent '
+          : 'text-gray-400 border-gray-400 cursor-not-allowed'
+      "
+      @click="nextPage()"
+      :disabled="!canContinue"
     >
-      Revisar Costos
+      Continuar
     </button>
   </div>
   <the-footer />
@@ -88,14 +97,14 @@ export default {
   },
   data() {
     return {
+      canContinue: true,
       options: [],
       costs: Object.fromEntries(
         this.names.map((x) => [
           x,
           Object.fromEntries(this.tasks.map((y) => [y, 1])),
-        ]),
+        ])
       ),
-      canContinue: true,
     };
   },
   methods: {
@@ -105,8 +114,23 @@ export default {
         "http://localhost:8000/checkCosts/",
         post
       );
-      console.log(response.data);
+      console.log(Object(this.costs));
       this.canContinue = response.data;
+    },
+    nextPage() {
+      if (this.canContinue) {
+        this.$router.push({
+          name: "RestrictionAssigner",
+          params: {
+            names: this.names,
+            tasks: this.tasks,
+            days: this.days,
+            eqRestrictions: this.eqRestrictions,
+            assignCosts: this.assignCosts,
+            costs: JSON.stringify(this.costs),
+          },
+        });
+      }
     },
   },
   async created() {

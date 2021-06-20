@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full flex flex-col m-5 items-center mx-auto space-y-10">
+  <div class="w-full flex flex-col m-5 mb-24 items-center mx-auto space-y-10">
     <h1 class="pt-10 text-3xl font-bold text-blue-500">
       Restricciones de justicia
     </h1>
@@ -18,9 +18,9 @@
       :headerText="rest.headerText"
       :example="rest.example"
       :tipText="rest.tipText"
-      :restrictionsOptions="options"
+      :restrictionsOptions="restrictionsOptions[rest.id]"
     />
-
+    <!--
     <router-link
       class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
       :to="{
@@ -34,19 +34,19 @@
     >
       Continuar
     </router-link>
-    <!--
+    -->
     <button
       class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
-      @click="showNames()"
+      @click="nextPage()"
     >
-      Next!
+      Resolver problema
     </button>
-    -->
   </div>
 </template>
 
 <script>
 import restriction from "../components/restriction.vue";
+import axios from "axios";
 export default {
   props: {
     names: Array,
@@ -55,33 +55,48 @@ export default {
     eqRestrictions: Boolean,
     assignCosts: Boolean,
     costs: Object,
+    restrictionsOptions: Object,
   },
   components: { restriction },
   methods: {
-    showNames() {
-      console.log(this.costs);
-      console.log(this.days);
+    async nextPage() {
+      let problemParams = {
+        names: this.names,
+        tasks: this.tasks,
+        days: this.days,
+        costs: this.costs,
+        min_assign_task: this.min_assign_task,
+        max_assign_task: this.max_assign_task,
+        max_total_assign: this.max_total_assign,
+        min_total_assign: this.min_total_assign,
+      };
+
+      const response = await axios.post(
+        "http://localhost:8000/resolve/",
+        problemParams
+      );
+      console.log(response.data);
+      console.log("RESOLVISTE EL PROBLEMA! :)");
     },
   },
   data() {
-    // el frontend debería comunicarle al backend
     return {
-      options: [
+      min_assign_task: 1,
+      max_assign_task: 10000,
+      max_total_assign: 10000,
+      min_total_assign: 1,
+      restrictionsVars: [
         {
-          text: "1",
+          id: "1",
           value: 1,
         },
         {
-          text: "2",
-          value: 2,
+          id: "2",
+          value: 10,
         },
         {
-          text: "3",
-          value: 3,
-        },
-        {
-          text: "4",
-          value: 4,
+          id: "3",
+          value: 10,
         },
       ],
       restrictionsList: [

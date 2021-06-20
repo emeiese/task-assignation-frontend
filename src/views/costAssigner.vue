@@ -114,22 +114,54 @@ export default {
         "http://localhost:8000/checkCosts/",
         post
       );
-      console.log(Object(this.costs));
       this.canContinue = response.data;
     },
-    nextPage() {
+    async nextPage() {
       if (this.canContinue) {
-        this.$router.push({
-          name: "RestrictionAssigner",
-          params: {
+        if (this.eqRestrictions) {
+          // Esto debería ser una función. Llamemosla function1()
+          let post = {
+            d: this.days.length,
+            t: this.tasks.length,
+            p: this.names.length,
+          };
+          const response = await axios.post(
+            "http://localhost:8000/get_restriction_options",
+            post
+          );
+
+          this.$router.push({
+            name: "RestrictionAssigner",
+            params: {
+              names: this.names,
+              tasks: this.tasks,
+              days: this.days,
+              eqRestrictions: this.eqRestrictions,
+              assignCosts: this.assignCosts,
+              costs: JSON.stringify(this.costs),
+              restrictionsOptions: JSON.stringify(response.data),
+            },
+          });
+        } else {
+          // Aquí debería guiar directo al problema de optimización:
+          let problemParams = {
             names: this.names,
             tasks: this.tasks,
             days: this.days,
-            eqRestrictions: this.eqRestrictions,
-            assignCosts: this.assignCosts,
-            costs: JSON.stringify(this.costs),
-          },
-        });
+            costs: this.costs,
+            min_assign_task: 1,
+            max_assign_task: 10000,
+            max_total_assign: 10000,
+            min_total_assign: 1,
+          };
+
+          const response = await axios.post(
+            "http://localhost:8000/resolve/",
+            problemParams
+          );
+          console.log(response.data);
+          console.log("RESOLVISTE EL PROBLEMA! :)")
+        }
       }
     },
   },

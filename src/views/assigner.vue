@@ -25,10 +25,9 @@
     <div class="flex flex-row pt-28 pb-10 space-x-10">
       <label class="text-gray-700">
         <input
-          type="radio"
-          value=""
+          type="checkbox"
           ref="restrictionsSelected"
-          v-model="eqRestrictions"
+          @click="uncheckRestrictions()"
         />
         <span class="ml-1"
           >Deseo agregar
@@ -42,12 +41,7 @@
         </span>
       </label>
       <label class="text-gray-700">
-        <input
-          type="radio"
-          value=""
-          ref="costsSelected"
-          v-model="assignCosts"
-        />
+        <input type="checkbox" ref="costsSelected" @click="uncheckCosts()" />
         <span class="ml-1"
           >Deseo agregar
           <Tooltip
@@ -76,6 +70,7 @@
 import inputAndSave from "../components/inputAndSave.vue";
 import TheFooter from "../components/TheFooter.vue";
 import Tooltip from "../components/SimpleTooltip.vue";
+import axios from "axios";
 
 export default {
   components: { inputAndSave, TheFooter, Tooltip },
@@ -106,17 +101,56 @@ export default {
     saveDays(objects) {
       this.days = objects.split(",").map((day) => day.trim());
     },
-    nextPage() {
-      this.$router.push({
-        name: "CostAssigner",
-        params: {
-          names: this.names,
-          tasks: this.tasks,
-          days: this.days,
-          eqRestrictions: this.eqRestrictions,
-          assignCosts: this.assignCosts,
-        },
-      });
+    async nextPage() {
+      if (this.assignCosts) {
+        this.$router.push({
+          name: "CostAssigner",
+          params: {
+            names: this.names,
+            tasks: this.tasks,
+            days: this.days,
+            eqRestrictions: this.eqRestrictions,
+            assignCosts: this.assignCosts,
+          },
+        });
+      } else if (this.eqRestrictions) {
+        // Esto debería ser una función. Llamemosla function1()
+        let post = {
+          d: this.days.length,
+          t: this.tasks.length,
+          p: this.names.length,
+        };
+        const response = await axios.post(
+          "http://localhost:8000/get_restriction_options",
+          post
+        );
+
+        const costs = Object.fromEntries(
+          this.names.map((x) => [
+            x,
+            Object.fromEntries(this.tasks.map((y) => [y, 1])),
+          ])
+        );
+
+        this.$router.push({
+          name: "RestrictionAssigner",
+          params: {
+            names: this.names,
+            tasks: this.tasks,
+            days: this.days,
+            eqRestrictions: this.eqRestrictions,
+            assignCosts: this.assignCosts,
+            costs: JSON.stringify(costs),
+            restrictionsOptions: JSON.stringify(response.data),
+          },
+        });
+      }
+    },
+    uncheckCosts() {
+      this.assignCosts = !this.assignCosts;
+    },
+    uncheckRestrictions() {
+      this.eqRestrictions = !this.eqRestrictions;
     },
   },
 };

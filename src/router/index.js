@@ -25,8 +25,8 @@ const routes = [
         names: route.params.names,
         tasks: route.params.tasks,
         days: route.params.days,
-        eqRestrictions: Boolean(route.params.eqRestrictions),
-        assignCosts: Boolean(route.params.assignCosts),
+        eqRestrictions: JSON.parse(route.params.eqRestrictions),
+        assignCosts: JSON.parse(route.params.assignCosts),
       };
     },
   },
@@ -39,9 +39,10 @@ const routes = [
         names: route.params.names,
         tasks: route.params.tasks,
         days: route.params.days,
-        eqRestrictions: Boolean(route.params.eqRestrictions),
-        assignCosts: Boolean(route.params.assignCosts),
+        eqRestrictions: JSON.parse(route.params.eqRestrictions),
+        assignCosts: JSON.parse(route.params.assignCosts),
         costs: JSON.parse(route.params.costs),
+        restrictionsOptions: JSON.parse(route.params.restrictionsOptions)
       };
     },
   },

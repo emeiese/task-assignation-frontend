@@ -144,6 +144,47 @@ export default {
             restrictionsOptions: JSON.stringify(response.data),
           },
         });
+      } else {
+        // En este caso, no se requiere asignar costos ni valores de igualdad.
+        const costs = Object.fromEntries(
+          this.names.map((x) => [
+            x,
+            Object.fromEntries(this.tasks.map((y) => [y, 1])),
+          ])
+        );
+        console.log(costs);
+        let problemParams = {
+          names: this.names,
+          tasks: this.tasks,
+          days: this.days,
+          costs: costs,
+          min_assign_task: 1,
+          max_assign_task: 1000,
+          max_total_assign: 1000,
+          min_total_assign: 1,
+        };
+
+        // Esto debería ser una función. Llamémosla function2()
+        const response = await axios.post(
+          "http://localhost:8000/resolve/",
+          problemParams
+        );
+        console.log(response.data);
+        if (response.data.status == "Optimal") {
+          console.log("RESOLVISTE EL PROBLEMA! :)");
+
+          // Cambiamos de página:
+          this.$router.push({
+            name: "Optimizer",
+            params: {
+              problemSettings: JSON.stringify(response.data),
+            },
+          });
+        } else {
+          console.log(
+            "El problema es infactible con los valores que acabas de asignar. Prueba con otros e intentalo de nuevo :("
+          );
+        }
       }
     },
     uncheckCosts() {

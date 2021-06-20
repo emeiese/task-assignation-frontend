@@ -155,12 +155,20 @@ export default {
             min_total_assign: 1,
           };
 
+          // Esto debería ser una función. Llamémosla function2()
           const response = await axios.post(
             "http://localhost:8000/resolve/",
             problemParams
           );
           console.log(response.data);
-          console.log("RESOLVISTE EL PROBLEMA! :)")
+          if (response.data.status == "Optimal") {
+            console.log("RESOLVISTE EL PROBLEMA! :)");
+            // irse a las iguiente página
+          } else {
+            console.log(
+              "El problema es infactible con los valores que acabas de asignar. Prueba con otros e intentalo de nuevo :("
+            );
+          }
         }
       }
     },

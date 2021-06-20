@@ -6,7 +6,7 @@
       <div class="flex flex-row items-center space-x-3">
         <div class="flex flex-row items-center">
           <span class="circle-number">{{ id }}</span>
-          <span class="pl-2 pt-1">
+          <span class="pl-2 pt-1 font-medium">
             {{ headerText }}
           </span>
         </div>
@@ -18,7 +18,10 @@
     <span class="text-xs text-gray-300">[<b>Tip:</b> {{ tipText }} ]</span>
     <select
       class="bg-white flex w-12 h-8 border-4 font-bold text-blue-500 rounded-md focus:ring"
+      @click="$emit('send-option', selectedValue)"
+      v-model="selectedValue"
     >
+      >
       <option
         class="text-blue-300"
         v-for="option in restrictionsOptions"
@@ -27,7 +30,6 @@
         >{{ option.value }}</option
       >
     </select>
-    
   </div>
 </template>
 
@@ -35,32 +37,16 @@
 export default {
   props: {
     id: String,
+    valueName: String,
+    defaultValue: Number,
     headerText: String,
     example: String,
     tipText: String,
     restrictionsOptions: Array,
   },
   data() {
-    // el frontend debería comunicarle al backend
     return {
-      options: [
-        {
-          text: "1",
-          value: 1,
-        },
-        {
-          text: "2",
-          value: 2,
-        },
-        {
-          text: "3",
-          value: 3,
-        },
-        {
-          text: "4",
-          value: 4,
-        },
-      ],
+      selectedvalue: this.defaultValue,
       tasksRepetition: false,
     };
   },

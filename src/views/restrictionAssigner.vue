@@ -15,10 +15,13 @@
       v-for="rest in restrictionsList"
       :key="rest.id"
       :id="rest.id"
+      :valueName="rest.valueName"
+      :defaultValue="rest.defaultValue"
       :headerText="rest.headerText"
       :example="rest.example"
       :tipText="rest.tipText"
       :restrictionsOptions="restrictionsOptions[rest.id]"
+      @send-option="saveValue({ valueName: rest.valueName, value: $event })"
     />
     <!--
     <router-link
@@ -65,65 +68,83 @@ export default {
         tasks: this.tasks,
         days: this.days,
         costs: this.costs,
-        min_assign_task: this.min_assign_task,
-        max_assign_task: this.max_assign_task,
-        max_total_assign: this.max_total_assign,
-        min_total_assign: this.min_total_assign,
+        min_assign_task: this.selectedOptions["min_assign_task"],
+        max_assign_task: this.selectedOptions["max_assign_task"],
+        max_total_assign: this.selectedOptions["max_total_assign"],
+        min_total_assign: this.selectedOptions["min_total_assign"],
       };
 
+      // Esto debería ser una función. Llamémosla function2()
       const response = await axios.post(
         "http://localhost:8000/resolve/",
         problemParams
       );
       console.log(response.data);
-      console.log("RESOLVISTE EL PROBLEMA! :)");
+      if (response.data.status == "Optimal") {
+        console.log("RESOLVISTE EL PROBLEMA! :)");
+
+        // Cambiamos de página:
+        this.$router.push({
+            name: "Optimizer",
+            params: {
+              problemSettings: JSON.stringify(response.data),
+            },
+          });
+      } else {
+        console.log("El problema es infactible con los valores que acabas de asignar. Prueba con otros e intentalo de nuevo :(")
+      }
+    },
+    saveValue(object) {
+      console.log(object);
+      this.selectedOptions[object.valueName] = object.value;
+      console.log(this.selectedOptions);
     },
   },
   data() {
     return {
-      min_assign_task: 1,
-      max_assign_task: 10000,
-      max_total_assign: 10000,
-      min_total_assign: 1,
-      restrictionsVars: [
-        {
-          id: "1",
-          value: 1,
-        },
-        {
-          id: "2",
-          value: 10,
-        },
-        {
-          id: "3",
-          value: 10,
-        },
-      ],
+      selectedOptions: {
+        min_assign_task: 1,
+        max_assign_task: 10000,
+        max_total_assign: 10000,
+        min_total_assign: 1,
+      },
       restrictionsList: [
         {
           id: "1",
+          valueName: "min_assign_task",
+          defaultValue: 1,
           headerText:
             "Ingresa el número mínimo de asignaciones que debe tener una persona en una tarea X durante la semana.",
           example:
-            "El número mínimo de veces que Tomás debe lavar en la semana es 1.",
+            "El número mínimo de veces que " +
+            this.names[0] +
+            " debe lavar en la semana es 1.",
           tipText:
             "Ten cuidado con asignar un número muy alto o el problema podria no tener solución 😢️ ",
         },
         {
           id: "2",
+          valueName: "max_assign_task",
+          defaultValue: 1000,
           headerText:
             "Ingresa el número máximo de asignaciones que puede tener una persona en una tarea durante la semana.",
           example:
-            "El número máximo de veces que Josefa debe lavar en la semana es 5.",
+            "El número máximo de veces que " +
+            this.names[0] +
+            " debe lavar en la semana es 5.",
           tipText:
             "Ten cuidado con asignar un número muy bajo o el problema podría no tener solución 😢️",
         },
         {
           id: "3",
+          valueName: "max_total_assign",
+          defaultValue: 1000,
           headerText:
             "Ingresa el número máximo de asignaciones totales  que puede tener una persona durante una semana.",
           example:
-            "El número máximo de asignaciones que Josefa debe tener durante la semana (sea cual sea la tarea) es 10",
+            "El número máximo de asignaciones que " +
+            this.names[0] +
+            " debe tener durante la semana (sea cual sea la tarea) es 10",
           tipText:
             "Ten cuidado con asignar un número muy bajo o el problema podría no tener solución 😢️",
         },

@@ -31,7 +31,7 @@ const routes = [
     },
   },
   {
-    path: "/assigner/costs/restrictions",
+    path: "/assigner/restrictions",
     name: "RestrictionAssigner",
     component: RestrictionAssigner,
     props(route) {
@@ -46,23 +46,13 @@ const routes = [
       };
     },
   },
-  /*
   {
-    path: "/assigner/costs/restrictions",
-    name: "RestrictionAssigner",
-    component: RestrictionAssigner,
-    props: true
-  },
-  */
-  {
-    path: "/optimize",
+    path: "/assigner/optimize",
     name: "Optimizer",
     component: Optimizer,
     props(route) {
       return {
-        names: route.query.names,
-        tasks: route.query.tasks,
-        days: route.query.days,
+        problemSettings: JSON.parse(route.params.problemSettings)
       };
     },
   },

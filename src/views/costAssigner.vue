@@ -160,7 +160,6 @@ export default {
             "https://8sdgtp.deta.dev/resolve/",
             problemParams
           );
-          console.log(response.data);
           if (response.data.status == "Optimal") {
             this.$router.push({
               name: "Optimizer",

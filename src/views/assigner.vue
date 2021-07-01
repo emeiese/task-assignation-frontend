@@ -121,7 +121,7 @@ export default {
           p: this.names.length,
         };
         const response = await axios.post(
-          "http://localhost:8000/get_restriction_options",
+          "https://l7i556.deta.dev/get_restriction_options",
           post
         );
 
@@ -166,7 +166,7 @@ export default {
 
         // Esto debería ser una función. Llamémosla function2()
         const response = await axios.post(
-          "http://localhost:8000/resolve/",
+          "https://l7i556.deta.dev/resolve/",
           problemParams
         );
         console.log(response.data);

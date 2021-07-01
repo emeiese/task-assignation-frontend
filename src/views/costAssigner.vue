@@ -111,7 +111,7 @@ export default {
     async checkCosts() {
       let post = { costs: this.costs };
       const response = await axios.post(
-        "http://localhost:8000/checkCosts/",
+        "https://l7i556.deta.dev/checkCosts/",
         post
       );
       this.canContinue = response.data;
@@ -126,7 +126,7 @@ export default {
             p: this.names.length,
           };
           const response = await axios.post(
-            "http://localhost:8000/get_restriction_options",
+            "https://l7i556.deta.dev/get_restriction_options",
             post
           );
 
@@ -157,7 +157,7 @@ export default {
 
           // Esto debería ser una función. Llamémosla function2()
           const response = await axios.post(
-            "http://localhost:8000/resolve/",
+            "https://l7i556.deta.dev/resolve/",
             problemParams
           );
           console.log(response.data);
@@ -176,7 +176,7 @@ export default {
   async created() {
     let post = { tasks: this.tasks };
     const response = await axios.post(
-      "http://localhost:8000/getOptions/",
+      "https://l7i556.deta.dev/getOptions/",
       post
     );
     this.options = response.data;

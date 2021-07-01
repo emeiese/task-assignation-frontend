@@ -80,7 +80,7 @@ export default {
         p: this.problemSettings.names.length,
       };
       const response = await axios.post(
-        "http://localhost:8000/get_restriction_options",
+        "https://l7i556.deta.dev/get_restriction_options",
         post
       );
 

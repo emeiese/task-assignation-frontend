@@ -152,7 +152,6 @@ export default {
             Object.fromEntries(this.tasks.map((y) => [y, 1])),
           ])
         );
-        console.log(costs);
         let problemParams = {
           names: this.names,
           tasks: this.tasks,
@@ -169,10 +168,7 @@ export default {
           "https://8sdgtp.deta.dev/resolve/",
           problemParams
         );
-        console.log(response.data);
         if (response.data.status == "Optimal") {
-          console.log("RESOLVISTE EL PROBLEMA! :)");
-
           // Cambiamos de página:
           this.$router.push({
             name: "Optimizer",

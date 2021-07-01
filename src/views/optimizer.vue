@@ -102,8 +102,6 @@ export default {
     const assign = this.problemSettings.assignation;
     const tasks = this.problemSettings.tasks;
     const days = this.problemSettings.days;
-    console.log("FLAG1");
-    console.log(assign, tasks, days);
     // Object.keys(assign).forEach(task => Object.keys(assign[task]).forEach(day => ));
 
     this.assignation = Object.fromEntries(
@@ -112,8 +110,6 @@ export default {
         Object.fromEntries(tasks.map((task) => [task, assign[task][day]])),
       ])
     );
-    console.log("FLAAAAAG desde optimizer");
-    console.log(this.problemSettings);
     // Object.fromEntries(this.names.map((x) => [x, Object.fromEntries(this.tasks.map((y) => [y, 1])),]));
   },
 };

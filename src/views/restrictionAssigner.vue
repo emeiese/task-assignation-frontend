@@ -77,17 +77,12 @@ export default {
         min_total_assign: this.selectedOptions["min_total_assign"],
       };
 
-      console.log("FLAAAAAG desde restrictionAssigner")
-      console.log(problemParams)
       // Esto debería ser una función. Llamémosla function2()
       const response = await axios.post(
         "https://8sdgtp.deta.dev/resolve/",
         problemParams
       );
-      console.log(response.data);
       if (response.data.status == "Optimal") {
-        console.log("RESOLVISTE EL PROBLEMA! :)");
-
         // Cambiamos de página:
         this.$router.push({
             name: "Optimizer",
@@ -96,14 +91,11 @@ export default {
             },
           });
       } else {
-        console.log("No puedo resolver el problema")
         this.cantSolve = true 
       }
     },
     saveValue(object) {
-      console.log(object);
       this.selectedOptions[object.valueName] = object.value;
-      console.log(this.selectedOptions);
     },
   },
   data() {

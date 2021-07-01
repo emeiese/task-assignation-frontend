@@ -81,7 +81,7 @@ export default {
       console.log(problemParams)
       // Esto debería ser una función. Llamémosla function2()
       const response = await axios.post(
-        "https://l7i556.deta.dev/resolve/",
+        "https://8sdgtp.deta.dev/resolve/",
         problemParams
       );
       console.log(response.data);

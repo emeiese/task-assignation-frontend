@@ -15,7 +15,7 @@
     <span
       ><b>Ejemplo: </b> <i>{{ example }}</i></span
     >
-    <span class="text-xs text-gray-300">[<b>Tip:</b> {{ tipText }} ]</span>
+    <span class="text-xs text-gray-400">[<b>Tip:</b> {{ tipText }} ]</span>
     <select
       class="bg-white flex w-12 h-8 border-4 font-bold text-blue-500 rounded-md focus:ring"
       @click="$emit('send-option', selectedValue)"

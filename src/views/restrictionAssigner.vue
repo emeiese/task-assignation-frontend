@@ -44,6 +44,9 @@
     >
       Resolver problema
     </button>
+    <div v-if="cantSolve"> 
+      El problema es infactible con los valores que acabas de asignar. Prueba con otros valores e intentalo de nuevo 😔️.
+    </div>
   </div>
 </template>
 
@@ -74,6 +77,8 @@ export default {
         min_total_assign: this.selectedOptions["min_total_assign"],
       };
 
+      console.log("FLAAAAAG desde restrictionAssigner")
+      console.log(problemParams)
       // Esto debería ser una función. Llamémosla function2()
       const response = await axios.post(
         "http://localhost:8000/resolve/",
@@ -91,7 +96,8 @@ export default {
             },
           });
       } else {
-        console.log("El problema es infactible con los valores que acabas de asignar. Prueba con otros e intentalo de nuevo :(")
+        console.log("No puedo resolver el problema")
+        this.cantSolve = true 
       }
     },
     saveValue(object) {
@@ -102,6 +108,7 @@ export default {
   },
   data() {
     return {
+      cantSolve: false,
       selectedOptions: {
         min_assign_task: 1,
         max_assign_task: 10000,

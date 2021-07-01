@@ -162,8 +162,12 @@ export default {
           );
           console.log(response.data);
           if (response.data.status == "Optimal") {
-            console.log("RESOLVISTE EL PROBLEMA! :)");
-            // irse a las iguiente página
+            this.$router.push({
+              name: "Optimizer",
+              params: {
+                problemSettings: JSON.stringify(response.data),
+              },
+            });
           } else {
             console.log(
               "El problema es infactible con los valores que acabas de asignar. Prueba con otros e intentalo de nuevo :("

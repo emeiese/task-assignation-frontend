@@ -8,19 +8,21 @@
         A continuación deberás asignar costos para cada persona por tarea 🙊️
       </span>
       <span>
-        Estos costos permitirán que el programa tome en cuenta que ciertas
-        personas son más reacias a realizar algunas tareas 👀️, por lo que
-        tratará de realizar la asignación minimizando esa molestia que puedan
-        tener estas personas.
+        Mientras más alto sea el número que asignes, más costosa será esa tarea
+        para la persona. El programa tratará de minimizar los costos de la gente
+        en base a esta asignación.
       </span>
       <span>
-        Para poder realizar esta asignación debes tener en cuenta la siguiente
+        Debes tener en cuenta la siguiente
         <b>regla</b> o el programa no te permitirá continuar:
       </span>
       <span class="font-semibold text-red-300">
         La suma de los costos para una persona debe ser de exactamente
         {{ tasks.length }}
       </span>
+      <span class="text-xs">
+        Espera unos segundos mientras se cargan las opciones 😁️</span
+      >
     </div>
     <div
       class=" w-3/4 divide-x grid grid-flow-col gap-2 rounded border-0 shadow-md"
@@ -48,25 +50,6 @@
         </div>
       </div>
     </div>
-    <!--
-    <router-link
-      class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
-      tag="button"
-      :disabled="canContinue"
-      :class="canContinue ? 'bg-green-500' : 'bg-red-500'"
-      :to="{
-        path: '/assigner/costs/restrictions',
-        query: {
-          names: names,
-          tasks: tasks,
-          days: days,
-          eqRestrictions: eqRestrictions,
-          assignCosts: assignCosts,
-        },
-      }"
-    >
-      Continuar
-    </router-link> -->
     <button
       class="bg-transpareny font-semibold py-2 px-4 border rounded"
       :class="
@@ -79,6 +62,12 @@
     >
       Continuar
     </button>
+    <span v-if="continueMessage" class="text-xs">
+      Espera unos segundos mientras te dirijo a la siguiente página 😁️</span
+    >
+    <span v-else class="text-white text-xs">
+      Texto invisible! :O Felicidades por encontrarlo jeje</span
+    >
   </div>
   <the-footer />
 </template>
@@ -97,6 +86,7 @@ export default {
   },
   data() {
     return {
+      continueMessage: false,
       canContinue: true,
       options: [],
       costs: Object.fromEntries(
@@ -117,6 +107,7 @@ export default {
       this.canContinue = response.data;
     },
     async nextPage() {
+      this.continueMessage = true;
       if (this.canContinue) {
         if (this.eqRestrictions) {
           // Esto debería ser una función. Llamemosla function1()

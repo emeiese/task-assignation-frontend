@@ -3,14 +3,16 @@
     <h1 class="pt-10 text-3xl font-bold text-blue-500">
       Restricciones de justicia
     </h1>
-    <span class="w-3/4 text-center">
-      El problema tiene como supuesto que
-      <b>las tareas se pueden repetir durante los días de semana escogidos</b> y
-      que <b>las personas pueden tener más de una tarea al día</b> , pero hay
-      algunas preguntas que debes responder para agregarle un poco de justicia a
-      la asignación de tareas entre las distintas personas durante un set de
-      días 🙌️
-    </span>
+    <div class="w-3/4 text-center space-y-3">
+      <div>
+        El problema tiene como supuesto que
+      <b>las personas pueden repetirse tareas durante la semana</b> y que
+      <b>pueden tener más de una tarea al día</b>, pero hay algunas preguntas
+      que debes responder para agregarle un poco de justicia a la asignación de
+      tareas entre las distintas personas en los días que escogiste 🙌️
+      </div>
+      <div>Ten ojo al asignar estos valores! Los números que se inserten deben tener sentido. Por ejemplo, si la semana tiene 7 días y solo hay una persona haciendo una tarea, no tendría sentido pedir que el mínimo de asignaciones por tarea sea 8). </div>
+    </div>
     <restriction
       v-for="rest in restrictionsList"
       :key="rest.id"
@@ -44,15 +46,24 @@
     >
       Resolver problema
     </button>
-    <div v-if="cantSolve"> 
-      El problema es infactible con los valores que acabas de asignar. Prueba con otros valores e intentalo de nuevo 😔️.
+    <span v-if="continueMessage" class="text-xs">
+      Espera unos segundos mientras te dirijo a la siguiente página 😁️</span
+    >
+    <span v-else class="text-white text-xs">
+      Texto invisible! :O Felicidades por encontrarlo jeje</span
+    >
+    <div v-if="cantSolve">
+      El problema es infactible con los valores que acabas de asignar. Prueba
+      con otros valores e intentalo de nuevo 😔️.
     </div>
+    <the-footer/>
   </div>
 </template>
 
 <script>
 import restriction from "../components/restriction.vue";
 import axios from "axios";
+import TheFooter from '../components/TheFooter.vue';
 export default {
   props: {
     names: Array,
@@ -63,9 +74,10 @@ export default {
     costs: Object,
     restrictionsOptions: Object,
   },
-  components: { restriction },
+  components: { restriction, TheFooter },
   methods: {
     async nextPage() {
+      this.continueMessage = true
       let problemParams = {
         names: this.names,
         tasks: this.tasks,
@@ -85,13 +97,13 @@ export default {
       if (response.data.status == "Optimal") {
         // Cambiamos de página:
         this.$router.push({
-            name: "Optimizer",
-            params: {
-              problemSettings: JSON.stringify(response.data),
-            },
-          });
+          name: "Optimizer",
+          params: {
+            problemSettings: JSON.stringify(response.data),
+          },
+        });
       } else {
-        this.cantSolve = true 
+        this.cantSolve = true;
       }
     },
     saveValue(object) {
@@ -100,6 +112,7 @@ export default {
   },
   data() {
     return {
+      continueMessage: false,
       cantSolve: false,
       selectedOptions: {
         min_assign_task: 1,

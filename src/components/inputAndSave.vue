@@ -32,12 +32,5 @@ export default {
     saveString: String,
     id: String,
   },
-  /*methods: {
-    saveNames() {
-      const stringObjects = document.getElementById(id).value;
-      this.objects = stringObjects.split(",").map((name) => name.trim());
-      console.log(this.objects);
-    },
-  },*/
 };
 </script>

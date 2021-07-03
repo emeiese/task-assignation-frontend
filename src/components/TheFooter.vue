@@ -1,7 +1,7 @@
 <template>
   <footer class="footer">
       <div
-        class="w-full flex flex-col align-middle absolute bottom-0 items-center"
+        class="w-full flex flex-col align-middle bottom-0 items-center"
       >
         <img
           class="w-12"
@@ -10,7 +10,7 @@
           title="Hi stranger"
         />
         <h3 class="text-xs font-mono">
-          Made with effort by
+          Made by
           <a class="text-blue-300" href="https://github.com/emeiese">
             Emeiese</a
           >

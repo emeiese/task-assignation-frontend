@@ -23,7 +23,7 @@
         </li>
       </ul>
     </div>
-    <div class="w-1/4 text-center">
+    <div class="w-1/4 text-center" v-if="problemSettings.max_assign_task != 10000">
       <h1 class="font-semibold">Restricciones de justicia del problema:</h1>
       <ul class="text-left py-5 list-disc">
         <li>
@@ -38,12 +38,14 @@
           <span v-if="problemSettings.max_assign_task > 1">veces</span
           ><span v-else>vez</span> cada tarea en la semana.
         </li>
+        <!-- 
         <li>
           Cada persona debe realizar al menos
           {{ problemSettings.min_total_assign }}
           <span v-if="problemSettings.min_total_assign > 1">tareas</span
           ><span v-else>tarea</span> cada semana.
         </li>
+        -->
         <li>
           Cada persona debe realizar a lo más
           {{ problemSettings.max_total_assign }}
@@ -56,7 +58,7 @@
       class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
       @click="nextPage()"
     >
-      Volver a reasignar restricciones de justicia
+      Reasignar restricciones de justicia
     </button>
   </div>
 </template>

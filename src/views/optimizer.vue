@@ -23,7 +23,7 @@
         </li>
       </ul>
     </div>
-    <div class="w-1/4 text-center" v-if="problemSettings.max_assign_task != 10000">
+    <div class="w-1/4 text-center" v-if="problemSettings.max_assign_task > 500">
       <h1 class="font-semibold">Restricciones de justicia del problema:</h1>
       <ul class="text-left py-5 list-disc">
         <li>

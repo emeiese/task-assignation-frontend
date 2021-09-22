@@ -1,8 +1,8 @@
 <template>
-  <h1 class="pt-10">
+  <h1 class="text-center pt-10">
     {{ upperString }}
   </h1>
-  <div class="relative flex w-1/2 flex-wrap items-stretch mb-3 pt-2">
+  <div class="relative flex md:w-1/2 flex-wrap items-stretch mb-3 pt-2">
     <input
       :id="id"
       type="text"

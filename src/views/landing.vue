@@ -30,7 +30,7 @@
       <div class="flex justify-center p-5 md:p-20">
           <router-link
             to="/assigner"
-            class=" bg-blue-500 hover:bg-blue-400 text-white text-sm text-center md:text-base font-bold py-2 md:px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"
+            class=" bg-blue-500 hover:bg-blue-400 text-white text-sm text-center md:text-base font-bold py-2 px-1 md:px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"
           >
             Haz click aquí para empezar 👀️
           </router-link>

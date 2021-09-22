@@ -1,10 +1,10 @@
 <template>
-  <div class="w-full flex flex-col m-5 mb-24 items-center mx-auto space-y-10">
-    <h1 class="pt-10 text-3xl font-bold text-blue-500">
+  <div class="w-full flex flex-col m-5 mb-24 items-center mx-auto space-y-7 md:space-y-10">
+    <h1 class="pt-10 text-center text-3xl font-bold text-blue-500">
       Asignación de tareas por día
     </h1>
     <div
-      class="w-1/3 divide-y grid grid-flow-row gap-2 rounded border-2 shadow-lg"
+      class="md:w-1/3 divide-y grid grid-flow-row gap-2 rounded border-2 shadow-lg"
     >
       <!-- Por cada task crea una fila -->
       <ul
@@ -23,7 +23,7 @@
         </li>
       </ul>
     </div>
-    <div class="w-1/4 text-center" v-if="problemSettings.max_assign_task > 500">
+    <div class="px-10 md:p-0 md:w-1/4 text-center" v-if="problemSettings.max_assign_task > 500">
       <h1 class="font-semibold">Restricciones de justicia del problema:</h1>
       <ul class="text-left py-5 list-disc">
         <li>
@@ -55,7 +55,7 @@
       </ul>
     </div>
     <button
-      class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+      class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white mx-4 md:mx-0 py-2 md:px-4 border border-blue-500 hover:border-transparent rounded"
       @click="nextPage()"
     >
       Reasignar restricciones de justicia

@@ -62,7 +62,7 @@
     >
       Continuar
     </button>
-    <span v-if="continueMessage" class="text-xs">
+    <span v-if="continueMessage" class="px-5 md:px-0 text-xs text-center">
       Espera unos segundos mientras te dirijo a la siguiente página 😁️</span
     >
     <span v-else class="text-white text-xs">

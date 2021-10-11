@@ -1,6 +1,6 @@
 <template>
   <div class="w-full flex flex-col m-5 mb-24 items-center mx-auto space-y-7 md:space-y-10">
-    <h1 class="pt-10 text-center text-3xl font-bold text-blue-500">
+    <h1 class="px-3 md: px-0 pt-10 text-center text-2xl md:text-3xl font-bold text-blue-500">
       Asignación de tareas por día
     </h1>
     <div
@@ -17,7 +17,7 @@
         <li
           v-for="(assigned, task) in dailyAssignation"
           :key="task"
-          class="py-3 flex flex-col items-center justify-between tracking-wide text-lg"
+          class="py-3 flex flex-col items-center justify-between tracking-wide text-sm md:text-lg"
         >
           {{ assigned }} debe {{ task }}
         </li>
@@ -55,7 +55,7 @@
       </ul>
     </div>
     <button
-      class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white mx-4 md:mx-0 py-2 md:px-4 border border-blue-500 hover:border-transparent rounded"
+      class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white mx-4 md:mx-1 py-2 md:px-4 border border-blue-500 hover:border-transparent rounded"
       @click="nextPage()"
     >
       Reasignar restricciones de justicia

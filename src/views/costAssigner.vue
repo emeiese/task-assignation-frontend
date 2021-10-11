@@ -1,9 +1,9 @@
 <template>
   <div class="w-full flex flex-col m-5 items-center mx-auto space-y-10">
-    <h1 class="pt-10 text-3xl font-bold text-blue-500">
+    <h1 class="text-center pt-10 text-2xl md:text-3xl font-bold text-blue-500">
       Asignación de costos por tarea
     </h1>
-    <div class="flex flex-col space-y-3 w-3/4 items-center text-center">
+    <div class="flex flex-col px-5 text-xs space-y-3 items-center text-justify md:px-0 md:text-base md:w-3/4 md:text-center">
       <span>
         A continuación deberás asignar costos para cada persona por tarea 🙊️
       </span>
@@ -25,13 +25,13 @@
       >
     </div>
     <div
-      class=" w-3/4 divide-x grid grid-flow-col gap-2 rounded border-0 shadow-md"
+      class="w-3/4 divide-y-4 md:divide-y md:divide-x grid md:grid-flow-col gap-2 rounded md:border-1 border-2 shadow-md md:shadow-md"
     >
-      <div v-for="name in names" :key="name" class="px-3 py-3">
+      <div v-for="name in names" :key="name" class="md:px-3 md:py-3">
         <div
           v-for="task in tasks"
           :key="task"
-          class="py-3 flex flex-row items-center justify-between font-mono text-sm"
+          class="px-2 md:px-0 py-3 flex flex-row items-center justify-between font-mono text-sm"
         >
           Costo de {{ name }} por {{ task }}:
           <select
@@ -62,7 +62,7 @@
     >
       Continuar
     </button>
-    <span v-if="continueMessage" class="text-xs">
+    <span v-if="continueMessage" class="px-5 md:px-0 text-xs text-center">
       Espera unos segundos mientras te dirijo a la siguiente página 😁️</span
     >
     <span v-else class="text-white text-xs">

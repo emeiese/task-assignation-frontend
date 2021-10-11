@@ -1,9 +1,9 @@
 <template>
-  <div class="w-full flex flex-col m-5 items-center mx-auto">
+  <div class="w-full flex flex-col px-4 md:px-0 md:m-5 items-center mx-auto">
     <input-and-save
       id="namesInput"
       upperString="Ingrese todas las personas que participan de las tareas, separadas por comas."
-      placeholder="Ejemplo: Josefa, Tomás, Ignacio, María"
+      placeholder="Josefa, Tomás, Ignacio, María"
       saveString="Ingresar personas"
       @save-objects="saveNames($event)"
     >
@@ -11,18 +11,18 @@
     <input-and-save
       id="tasksInput"
       upperString="Ingrese todas las tareas a asignar, separadas por comas."
-      placeholder="Ejemplo: lavar, cocinar, limpiar"
+      placeholder="lavar, cocinar, limpiar"
       saveString="Ingresar tareas"
       @save-objects="saveTasks($event)"
     ></input-and-save>
     <input-and-save
       id="periodsInput"
       upperString="Ingrese los días de la semana en los que las tareas se asignan a las personas"
-      placeholder="Ejemplo: Lunes, Martes, Miércoles, Jueves, Viernes, Sábado, Domingo"
+      placeholder="Lunes, Martes, Miércoles, Jueves, Viernes, Sábado, Domingo"
       saveString="Ingresar días"
       @save-objects="saveDays($event)"
     ></input-and-save>
-    <div class="flex flex-row pt-28 pb-10 space-x-10">
+    <div class="flex flex-col md:flex-row pt-10 md:pt-28 pb-10 space-y-5 md:space-y-0 md:space-x-10">
       <label class="text-gray-700">
         <input
           type="checkbox"

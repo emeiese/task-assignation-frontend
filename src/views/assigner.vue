@@ -6,7 +6,7 @@
     <input-and-save
       id="namesInput"
       upperString="Ingrese todas las personas que participan de las tareas, separadas por comas."
-      placeholder="Josefa, Tomás, Ignacio, María"
+      placeholder="Ej: Josefa, Tomás, Ignacio, María"
       saveString="Ingresar personas"
       @save-objects="saveNames($event)"
     >
@@ -14,14 +14,14 @@
     <input-and-save
       id="tasksInput"
       upperString="Ingrese todas las tareas a asignar, separadas por comas."
-      placeholder="lavar, cocinar, limpiar"
+      placeholder="Ej: lavar, cocinar, limpiar"
       saveString="Ingresar tareas"
       @save-objects="saveTasks($event)"
     ></input-and-save>
     <input-and-save
       id="periodsInput"
       upperString="Ingrese los días de la semana en los que las tareas se asignan a las personas"
-      placeholder="Lunes, Martes, Miércoles, Jueves, Viernes, Sábado, Domingo"
+      placeholder="Ej: Lunes, Martes, Miércoles, Jueves, Viernes, Sábado, Domingo"
       saveString="Ingresar días"
       @save-objects="saveDays($event)"
     ></input-and-save>
@@ -92,13 +92,19 @@ export default {
   },
   methods: {
     saveNames(objects) {
-      this.names = objects.split(",").map((name) => name.trim());
+      if (objects){
+        this.names = objects.split(",").map((name) => name.trim());
+      }
     },
     saveTasks(objects) {
-      this.tasks = objects.split(",").map((task) => task.trim());
+      if (objects){
+        this.tasks = objects.split(",").map((task) => task.trim());
+      }
     },
     saveDays(objects) {
+      if (objects){
       this.days = objects.split(",").map((day) => day.trim());
+      }
     },
     triggerWarning() {
       this.showWarning = true;
@@ -107,7 +113,6 @@ export default {
     async nextPage() {
       if (!this.names || !this.tasks || !this.days) {
         this.triggerWarning();
-        console.log("warning:", this.showWarning);
       } else {
         if (this.assignCosts) {
           this.$router.push({

@@ -1,7 +1,11 @@
 <template>
   <div class="w-full flex flex-col px-4 md:px-0 md:m-5 items-center mx-auto">
     <transition name="alert">
-      <warning-box v-if="showWarning" />
+      <pop-box
+        v-if="showWarning"
+        message="Recuerda que debes ingresar una lista de personas, tareas y días."
+        :warning="true"
+      />
     </transition>
     <input-and-save
       id="namesInput"
@@ -67,6 +71,13 @@
     >
       Continuar
     </button>
+    <transition name="alert">
+      <pop-box
+        v-if="continueMessage"
+        message="Espera unos segundos mientras te redirijo a la siguiente página..."
+        :warning="false"
+      />
+    </transition>
   </div>
   <TheFooter />
 </template>
@@ -75,11 +86,11 @@
 import inputAndSave from "../components/inputAndSave.vue";
 import TheFooter from "../components/TheFooter.vue";
 import Tooltip from "../components/SimpleTooltip.vue";
-import warningBox from "../components/warningBox.vue";
+import popBox from "../components/popBox.vue";
 import axios from "axios";
 
 export default {
-  components: { inputAndSave, TheFooter, Tooltip, warningBox },
+  components: { inputAndSave, TheFooter, Tooltip, popBox },
   data() {
     return {
       names: false,
@@ -88,6 +99,7 @@ export default {
       showWarning: false,
       eqRestrictions: false,
       assignCosts: false,
+      continueMessage: false,
     };
   },
   methods: {
@@ -114,6 +126,7 @@ export default {
       if (!this.names || !this.tasks || !this.days) {
         this.triggerWarning();
       } else {
+        this.continueMessage = true;
         if (this.assignCosts) {
           this.$router.push({
             name: "CostAssigner",

@@ -111,6 +111,7 @@ export default {
       setTimeout(() => (this.showWarning = false), 3000);
     },
     async nextPage() {
+      console.log("Names:", this.names)
       if (!this.names || !this.tasks || !this.days) {
         this.triggerWarning();
       } else {

@@ -16,12 +16,6 @@
       <i class="fas fa-user"></i>
     </span>
   </div>
-  <button
-    class="w-40 text-sm bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
-    @click="$emit('save-objects', objects)"
-  >
-    {{ saveString }}
-  </button>
 </template>
 
 <script>
@@ -31,6 +25,17 @@ export default {
     placeholder: String,
     saveString: String,
     id: String,
+  },
+  emits: ["save-objects"],
+  data() {
+    return {
+      objects: "",
+    };
+  },
+  watch: {
+    objects: function(newValue) {
+      this.$emit("save-objects", newValue);
+    },
   },
 };
 </script>

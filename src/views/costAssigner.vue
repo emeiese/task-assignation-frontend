@@ -3,7 +3,9 @@
     <h1 class="text-center pt-10 text-2xl md:text-3xl font-bold text-blue-500">
       Asignación de costos por tarea
     </h1>
-    <div class="flex flex-col px-5 text-xs space-y-3 items-center text-justify md:px-0 md:text-base md:w-3/4 md:text-center">
+    <div
+      class="flex flex-col px-5 text-xs space-y-3 items-center text-justify md:px-0 md:text-base md:w-3/4 md:text-center"
+    >
       <span>
         A continuación deberás asignar costos para cada persona por tarea 🙊️
       </span>
@@ -62,12 +64,13 @@
     >
       Continuar
     </button>
-    <span v-if="continueMessage" class="px-5 md:px-0 text-xs text-center">
-      Espera unos segundos mientras te dirijo a la siguiente página 😁️</span
-    >
-    <span v-else class="text-white text-xs">
-      Texto invisible! :O Felicidades por encontrarlo jeje</span
-    >
+    <transition name="alert">
+      <pop-box
+        v-if="continueMessage"
+        message="Espera unos segundos mientras te redirijo a la siguiente página..."
+        :warning="false"
+      />
+    </transition>
   </div>
   <the-footer />
 </template>
@@ -75,8 +78,10 @@
 <script>
 import axios from "axios";
 import TheFooter from "../components/TheFooter.vue";
+import popBox from "../components/popBox.vue";
+
 export default {
-  components: { TheFooter },
+  components: { TheFooter, popBox },
   props: {
     names: Array,
     tasks: Array,

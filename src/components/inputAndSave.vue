@@ -26,6 +26,7 @@ export default {
     saveString: String,
     id: String,
   },
+  emits: ["save-objects"],
   data() {
     return {
       objects: "",

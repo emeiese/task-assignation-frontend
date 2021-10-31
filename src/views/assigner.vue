@@ -1,7 +1,7 @@
 <template>
   <div class="w-full flex flex-col px-4 md:px-0 md:m-5 items-center mx-auto">
     <transition name="alert">
-      <warning-box v-if="showWarning"/>
+      <warning-box v-if="showWarning" />
     </transition>
     <input-and-save
       id="namesInput"
@@ -79,7 +79,7 @@ import warningBox from "../components/warningBox.vue";
 import axios from "axios";
 
 export default {
-  components: { inputAndSave, TheFooter, Tooltip, warningBox},
+  components: { inputAndSave, TheFooter, Tooltip, warningBox },
   data() {
     return {
       names: false,
@@ -92,18 +92,18 @@ export default {
   },
   methods: {
     saveNames(objects) {
-      if (objects){
+      if (objects) {
         this.names = objects.split(",").map((name) => name.trim());
       }
     },
     saveTasks(objects) {
-      if (objects){
+      if (objects) {
         this.tasks = objects.split(",").map((task) => task.trim());
       }
     },
     saveDays(objects) {
-      if (objects){
-      this.days = objects.split(",").map((day) => day.trim());
+      if (objects) {
+        this.days = objects.split(",").map((day) => day.trim());
       }
     },
     triggerWarning() {
@@ -111,7 +111,6 @@ export default {
       setTimeout(() => (this.showWarning = false), 3000);
     },
     async nextPage() {
-      console.log("Names:", this.names)
       if (!this.names || !this.tasks || !this.days) {
         this.triggerWarning();
       } else {

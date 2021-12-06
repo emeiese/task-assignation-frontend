@@ -52,7 +52,7 @@
     <span v-else class="text-white text-xs">
       Texto invisible! :O Felicidades por encontrarlo jeje</span
     >
-    <div v-if="cantSolve">
+    <div v-if="infactible">
       El problema es infactible con los valores que acabas de asignar. Prueba
       con otros valores e intentalo de nuevo 😔️.
     </div>
@@ -103,7 +103,7 @@ export default {
           },
         });
       } else {
-        this.cantSolve = true;
+        this.infactible = true;
       }
     },
     saveValue(object) {
@@ -113,7 +113,7 @@ export default {
   data() {
     return {
       continueMessage: false,
-      cantSolve: false,
+      infactible: false,
       selectedOptions: {
         min_assign_task: 1,
         max_assign_task: false,

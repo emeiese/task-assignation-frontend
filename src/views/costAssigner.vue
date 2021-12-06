@@ -106,7 +106,7 @@ export default {
     async checkCosts() {
       let post = { costs: this.costs };
       const response = await axios.post(
-        "https://8sdgtp.deta.dev/checkCosts/",
+        this.apiLink + "/checkCosts/",
         post
       );
       this.canContinue = response.data;
@@ -122,7 +122,7 @@ export default {
             p: this.names.length,
           };
           const response = await axios.post(
-            "https://8sdgtp.deta.dev/get_restriction_options",
+            this.apiLink + "/get_restriction_options",
             post
           );
 
@@ -146,14 +146,14 @@ export default {
             days: this.days,
             costs: this.costs,
             min_assign_task: 1,
-            max_assign_task: 10000,
-            max_total_assign: 10000,
+            max_assign_task: false,
+            max_total_assign: false,
             min_total_assign: 1,
           };
 
           // Esto debería ser una función. Llamémosla function2()
           const response = await axios.post(
-            "https://8sdgtp.deta.dev/resolve/",
+            this.apiLink + "/resolve/",
             problemParams
           );
           if (response.data.status == "Optimal") {
@@ -175,7 +175,7 @@ export default {
   async created() {
     let post = { tasks: this.tasks };
     const response = await axios.post(
-      "https://8sdgtp.deta.dev/getOptions/",
+      this.apiLink + "/getOptions/",
       post
     );
     this.options = response.data;

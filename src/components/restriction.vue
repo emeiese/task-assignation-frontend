@@ -38,7 +38,7 @@ export default {
   props: {
     id: String,
     valueName: String,
-    defaultValue: Number,
+    defaultValue: [Number, Boolean],
     headerText: String,
     example: String,
     tipText: String,

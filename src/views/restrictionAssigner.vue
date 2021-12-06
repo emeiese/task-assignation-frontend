@@ -91,7 +91,7 @@ export default {
 
       // Esto debería ser una función. Llamémosla function2()
       const response = await axios.post(
-        "https://8sdgtp.deta.dev/resolve/",
+        this.apiLink + "/resolve/",
         problemParams
       );
       if (response.data.status == "Optimal") {
@@ -116,8 +116,8 @@ export default {
       cantSolve: false,
       selectedOptions: {
         min_assign_task: 1,
-        max_assign_task: 10000,
-        max_total_assign: 10000,
+        max_assign_task: false,
+        max_total_assign: false,
         min_total_assign: 1,
       },
       restrictionsList: [
@@ -137,7 +137,7 @@ export default {
         {
           id: "2",
           valueName: "max_assign_task",
-          defaultValue: 1000,
+          defaultValue: false,
           headerText:
             "Ingresa el número máximo de asignaciones que puede tener una persona en una tarea durante la semana.",
           example:
@@ -150,7 +150,7 @@ export default {
         {
           id: "3",
           valueName: "max_total_assign",
-          defaultValue: 1000,
+          defaultValue: false,
           headerText:
             "Ingresa el número máximo de asignaciones totales  que puede tener una persona durante una semana.",
           example:

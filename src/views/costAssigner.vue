@@ -66,7 +66,12 @@
     </button>
     <transition name="alert">
       <pop-box
-        v-if="continueMessage"
+        v-if="infactible"
+        message="Tu problema es infactible con los valores que insertaste 😢️, prueba con otros e inténtalo de nuevo."
+        :warning="true"
+      />
+      <pop-box
+        v-else-if="continueMessage"
         message="Espera unos segundos mientras te redirijo a la siguiente página..."
         :warning="false"
       />
@@ -98,8 +103,9 @@ export default {
         this.names.map((x) => [
           x,
           Object.fromEntries(this.tasks.map((y) => [y, 1])),
-        ])
+        ]),
       ),
+      infactible: false,
     };
   },
   methods: {
@@ -157,6 +163,7 @@ export default {
             problemParams
           );
           if (response.data.status == "Optimal") {
+            // Cambiamos de página:
             this.$router.push({
               name: "Optimizer",
               params: {
@@ -164,9 +171,9 @@ export default {
               },
             });
           } else {
-            console.log(
-              "El problema es infactible con los valores que acabas de asignar. Prueba con otros e intentalo de nuevo :("
-            );
+            this.continueMessage = false;
+            this.infactible = true;
+            setTimeout(() => (this.infactible = false), 3000);
           }
         }
       }

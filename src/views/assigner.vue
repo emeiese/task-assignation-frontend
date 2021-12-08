@@ -73,7 +73,12 @@
     </button>
     <transition name="alert">
       <pop-box
-        v-if="continueMessage"
+        v-if="infactible"
+        message="Tu problema es infactible con los valores que insertaste 😢️, prueba con otros e inténtalo de nuevo."
+        :warning="true"
+      />
+      <pop-box
+        v-else-if="continueMessage"
         message="Espera unos segundos mientras te redirijo a la siguiente página..."
         :warning="false"
       />
@@ -100,6 +105,7 @@ export default {
       eqRestrictions: false,
       assignCosts: false,
       continueMessage: false,
+      infactible: false,
     };
   },
   methods: {
@@ -202,9 +208,9 @@ export default {
               },
             });
           } else {
-            console.log(
-              "El problema es infactible con los valores que acabas de asignar. Prueba con otros e intentalo de nuevo :("
-            );
+            this.continueMessage = false;
+            this.infactible = true;
+            setTimeout(() => (this.infactible = false), 3000);
           }
         }
       }
@@ -226,7 +232,7 @@ export default {
 }
 
 .alert-enter-active {
-  transition: all 0.3s ease;
+  transition: all 0.4s ease;
 }
 
 .alert-leave-to {
@@ -234,6 +240,6 @@ export default {
   transform: translateY(-60px);
 }
 .alert-leave-active {
-  transition: all 0.3s ease;
+  transition: all 0.4s ease;
 }
 </style>

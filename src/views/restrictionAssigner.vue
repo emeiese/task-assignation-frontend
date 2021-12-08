@@ -9,13 +9,13 @@
         <b>las personas pueden repetirse tareas durante la semana</b> y que
         <b>pueden tener más de una tarea al día</b>, pero hay algunas preguntas
         que debes responder para agregarle un poco de justicia a la asignación
-        de tareas entre las distintas personas en los días que escogiste 🙌️
+        🙌️
       </div>
       <div>
-        Ten ojo al asignar estos valores! Los números que se inserten deben
+        Los números que insertes deben
         tener sentido. Por ejemplo, si la semana tiene 7 días y solo hay una
-        persona haciendo una tarea, no tendría sentido pedir que el mínimo de
-        asignaciones por tarea sea 8).
+        persona haciendo una tarea, no tiene sentido pedir que el mínimo de
+        asignaciones por tarea sea 8.
       </div>
     </div>
     <restriction
@@ -30,21 +30,6 @@
       :restrictionsOptions="restrictionsOptions[rest.id]"
       @send-option="saveValue({ valueName: rest.valueName, value: $event })"
     />
-    <!--
-    <router-link
-      class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
-      :to="{
-        path: '/optimize',
-        query: {
-          names: names,
-          tasks: tasks,
-          days: days,
-        },
-      }"
-    >
-      Continuar
-    </router-link>
-    -->
     <button
       class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
       @click="nextPage()"
@@ -136,12 +121,7 @@ export default {
           defaultValue: 1,
           headerText:
             "Ingresa el número mínimo de asignaciones que debe tener una persona en una tarea X durante la semana.",
-          example:
-            "El número mínimo de veces que " +
-            this.names[0] +
-            " debe " +
-            this.tasks[0] +
-            " en la semana es 1.",
+          example: `El número mínimo de veces que ${this.names[0]} debe ${this.tasks[0]} en la semana es 1.`,
           tipText:
             "Ten cuidado con asignar un número muy alto o el problema podria no tener solución 😢️ ",
         },
@@ -151,12 +131,7 @@ export default {
           defaultValue: false,
           headerText:
             "Ingresa el número máximo de asignaciones que puede tener una persona en una tarea durante la semana.",
-          example:
-            "El número máximo de veces que " +
-            this.names[0] +
-            " debe " +
-            this.tasks[0] +
-            " en la semana es 5.",
+          example: `El número máximo de veces que ${this.names[0]} debe ${this.tasks[0]} en la semana es 5.`,
           tipText:
             "Ten cuidado con asignar un número muy bajo o el problema podría no tener solución 😢️",
         },

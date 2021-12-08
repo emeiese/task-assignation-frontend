@@ -2,43 +2,39 @@
   <!-- recovered from https://qvault.io/javascript/creating-a-custom-tooltip-component-in-vue/ -->
   <div class="tooltip-box">
     <slot />
-    <div
-      class="tooltip"
-    >
-      <span
-        class="text text-xs"
-      >{{ text }}</span>
+    <div class="tooltip">
+      <span class="text text-xs">{{ text }}</span>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  props: { 
+  props: {
     text: {
       type: String,
-      required: true
-    }
-  }
+      required: true,
+    },
+  },
 };
 </script>
 
 <style scoped>
-.tooltip-box { 
+.tooltip-box {
   position: relative;
   display: inline-block;
 }
 
-.tooltip-box:hover .tooltip{
+.tooltip-box:hover .tooltip {
   opacity: 1;
 }
 
-.tooltip { 
+.tooltip {
   color: #ffffff;
   text-align: center;
   padding: 10px 10px;
   border-radius: 10px;
-  
+
   width: 500px;
   bottom: 100%;
   left: 50%;

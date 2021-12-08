@@ -1,6 +1,10 @@
 <template>
-  <div class="w-full flex flex-col m-5 mb-24 items-center mx-auto space-y-7 md:space-y-10">
-    <h1 class="px-3 md:px-0 pt-10 text-center text-2xl md:text-3xl font-bold text-blue-500">
+  <div
+    class="w-full flex flex-col m-5 mb-24 items-center mx-auto space-y-7 md:space-y-10"
+  >
+    <h1
+      class="px-3 md:px-0 pt-10 text-center text-2xl md:text-3xl font-bold text-blue-500"
+    >
       Asignación de tareas por día
     </h1>
     <div
@@ -12,7 +16,9 @@
         :key="day"
         class="px-6 py-4"
       >
-        <h2 class="font-semibold text-lg text-blue-700 tracking-wide uppercase">{{ day }}</h2>
+        <h2 class="font-semibold text-lg text-blue-700 tracking-wide uppercase">
+          {{ day }}
+        </h2>
         <!-- Por cada día crea una columna -->
         <li
           v-for="(assigned, task) in dailyAssignation"

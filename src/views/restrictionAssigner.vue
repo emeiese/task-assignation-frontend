@@ -12,10 +12,9 @@
         🙌️
       </div>
       <div>
-        Los números que insertes deben
-        tener sentido. Por ejemplo, si la semana tiene 7 días y solo hay una
-        persona haciendo una tarea, no tiene sentido pedir que el mínimo de
-        asignaciones por tarea sea 8.
+        Los números que insertes deben tener sentido. Por ejemplo, si la semana
+        tiene 7 días y solo hay una persona haciendo una tarea, no tiene sentido
+        pedir que el mínimo de asignaciones por tarea sea 8.
       </div>
     </div>
     <restriction

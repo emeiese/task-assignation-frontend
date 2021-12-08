@@ -103,7 +103,7 @@ export default {
         this.names.map((x) => [
           x,
           Object.fromEntries(this.tasks.map((y) => [y, 1])),
-        ]),
+        ])
       ),
       infactible: false,
     };
@@ -111,10 +111,7 @@ export default {
   methods: {
     async checkCosts() {
       let post = { costs: this.costs };
-      const response = await axios.post(
-        this.apiLink + "/checkCosts/",
-        post
-      );
+      const response = await axios.post(this.apiLink + "/checkCosts/", post);
       this.canContinue = response.data;
     },
     async nextPage() {
@@ -181,10 +178,7 @@ export default {
   },
   async created() {
     let post = { tasks: this.tasks };
-    const response = await axios.post(
-      this.apiLink + "/getOptions/",
-      post
-    );
+    const response = await axios.post(this.apiLink + "/getOptions/", post);
     this.options = response.data;
   },
 };

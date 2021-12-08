@@ -6,12 +6,17 @@
     <div class="w-3/4 text-center space-y-3">
       <div>
         El problema tiene como supuesto que
-      <b>las personas pueden repetirse tareas durante la semana</b> y que
-      <b>pueden tener más de una tarea al día</b>, pero hay algunas preguntas
-      que debes responder para agregarle un poco de justicia a la asignación de
-      tareas entre las distintas personas en los días que escogiste 🙌️
+        <b>las personas pueden repetirse tareas durante la semana</b> y que
+        <b>pueden tener más de una tarea al día</b>, pero hay algunas preguntas
+        que debes responder para agregarle un poco de justicia a la asignación
+        de tareas entre las distintas personas en los días que escogiste 🙌️
       </div>
-      <div>Ten ojo al asignar estos valores! Los números que se inserten deben tener sentido. Por ejemplo, si la semana tiene 7 días y solo hay una persona haciendo una tarea, no tendría sentido pedir que el mínimo de asignaciones por tarea sea 8). </div>
+      <div>
+        Ten ojo al asignar estos valores! Los números que se inserten deben
+        tener sentido. Por ejemplo, si la semana tiene 7 días y solo hay una
+        persona haciendo una tarea, no tendría sentido pedir que el mínimo de
+        asignaciones por tarea sea 8).
+      </div>
     </div>
     <restriction
       v-for="rest in restrictionsList"
@@ -46,24 +51,26 @@
     >
       Resolver problema
     </button>
-    <span v-if="continueMessage" class="text-xs">
-      Espera unos segundos mientras te dirijo a la siguiente página 😁️</span
-    >
-    <span v-else class="text-white text-xs">
-      Texto invisible! :O Felicidades por encontrarlo jeje</span
-    >
-    <div v-if="infactible">
-      El problema es infactible con los valores que acabas de asignar. Prueba
-      con otros valores e intentalo de nuevo 😔️.
-    </div>
-    <the-footer/>
+    <pop-box
+      v-if="infactible"
+      message="El problema es infactible con los valores que acabas de asignar. Prueba
+      con otros valores e inténtalo de nuevo 😔️"
+      :warning="true"
+    />
+    <pop-box
+      v-else-if="continueMessage"
+      message="Espera unos segundos mientras te redirijo a la siguiente página..."
+      :warning="false"
+    />
+    <the-footer />
   </div>
 </template>
 
 <script>
 import restriction from "../components/restriction.vue";
 import axios from "axios";
-import TheFooter from '../components/TheFooter.vue';
+import TheFooter from "../components/TheFooter.vue";
+import popBox from "../components/popBox.vue";
 export default {
   props: {
     names: Array,
@@ -74,10 +81,10 @@ export default {
     costs: Object,
     restrictionsOptions: Object,
   },
-  components: { restriction, TheFooter },
+  components: { restriction, TheFooter, popBox },
   methods: {
     async nextPage() {
-      this.continueMessage = true
+      this.continueMessage = true;
       let problemParams = {
         names: this.names,
         tasks: this.tasks,
@@ -103,7 +110,9 @@ export default {
           },
         });
       } else {
+        this.continueMessage = false;
         this.infactible = true;
+        setTimeout(() => (this.infactible = false), 3000);
       }
     },
     saveValue(object) {
@@ -130,7 +139,9 @@ export default {
           example:
             "El número mínimo de veces que " +
             this.names[0] +
-            " debe lavar en la semana es 1.",
+            " debe " +
+            this.tasks[0] +
+            " en la semana es 1.",
           tipText:
             "Ten cuidado con asignar un número muy alto o el problema podria no tener solución 😢️ ",
         },
@@ -143,7 +154,9 @@ export default {
           example:
             "El número máximo de veces que " +
             this.names[0] +
-            " debe lavar en la semana es 5.",
+            " debe " +
+            this.tasks[0] +
+            " en la semana es 5.",
           tipText:
             "Ten cuidado con asignar un número muy bajo o el problema podría no tener solución 😢️",
         },

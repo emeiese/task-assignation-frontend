@@ -7,8 +7,8 @@ import router from "./router";
 let app = createApp(App)
 
 // 2. Assign the global variable before mounting
-// app.config.globalProperties.apiLink = "http://127.0.0.1:8000";
-app.config.globalProperties.apiLink = "https://8sdgtp.deta.dev";
+app.config.globalProperties.apiLink = "http://127.0.0.1:8000";
+// app.config.globalProperties.apiLink = "https://8sdgtp.deta.dev";
 
 // 3. Use router and mount app
 app.use(router).mount('#app');

@@ -7,7 +7,9 @@
         :warning="true"
       />
     </transition>
-    <input-and-save
+    <div
+     class="w-3/4 space-y-4">
+      <input-and-save
       v-for="inputItem in inputsList"
       :key="inputItem.id"
       :id="inputItem.id"
@@ -16,6 +18,7 @@
       :saveString="inputItem.saveString"
       @save-objects="save({ type: inputItem.type, list: $event })"
     />
+    </div>
     <!-- 
     <input-and-save
       id="namesInput"
@@ -137,7 +140,7 @@ export default {
         {
           id: "3",
           upperString:
-            "Ingrese los días de la semana en los que las tareas se asignan a las personas",
+            "Ingrese los períodos en los que las tareas se asignan a las personas.",
           placeholder:
             "Ej: Lunes, Martes, Miércoles, Jueves, Viernes, Sábado, Domingo",
           saveString: "Ingresar días",

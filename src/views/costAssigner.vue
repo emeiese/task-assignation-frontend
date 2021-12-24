@@ -8,19 +8,9 @@
     >
       <span>
         A continuación deberás asignar costos para cada persona por tarea 🙊️
-      </span>
-      <span>
         Mientras más alto sea el número que asignes, más costosa será esa tarea
         para la persona. El programa tratará de minimizar los costos de la gente
         en base a esta asignación.
-      </span>
-      <span>
-        Debes tener en cuenta la siguiente
-        <b>regla</b> o el programa no te permitirá continuar:
-      </span>
-      <span class="font-semibold text-red-300">
-        La suma de los costos para una persona debe ser de exactamente
-        {{ tasks.length }}
       </span>
       <span class="text-xs">
         Espera unos segundos mientras se cargan las opciones 😁️</span
@@ -52,6 +42,10 @@
         </div>
       </div>
     </div>
+    <span>
+      Ten en cuenta que la suma de los costos para una persona debe ser de
+      exactamente {{ tasks.length }} o<b> no podrás continuar</b>:
+    </span>
     <button
       class="bg-transpareny font-semibold py-2 px-4 border rounded"
       :class="

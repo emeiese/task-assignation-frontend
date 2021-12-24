@@ -8,7 +8,7 @@
       />
     </transition>
     <div
-     class="w-3/4 space-y-4">
+     class="w-1/2 space-y-4">
       <input-and-save
       v-for="inputItem in inputsList"
       :key="inputItem.id"
@@ -19,30 +19,6 @@
       @save-objects="save({ type: inputItem.type, list: $event })"
     />
     </div>
-    <!-- 
-    <input-and-save
-      id="namesInput"
-      upperString="Ingrese todas las personas que participan de las tareas, separadas por comas."
-      placeholder="Ej: Josefa, Tomás, Ignacio, María"
-      saveString="Ingresar personas"
-      @save-objects="saveNames($event)"
-    >
-    </input-and-save>
-    <input-and-save
-      id="tasksInput"
-      upperString="Ingrese todas las tareas a asignar, separadas por comas."
-      placeholder="Ej: lavar, cocinar, limpiar"
-      saveString="Ingresar tareas"
-      @save-objects="saveTasks($event)"
-    ></input-and-save>
-    <input-and-save
-      id="periodsInput"
-      upperString="Ingrese los días de la semana en los que las tareas se asignan a las personas"
-      placeholder="Ej: Lunes, Martes, Miércoles, Jueves, Viernes, Sábado, Domingo"
-      saveString="Ingresar días"
-      @save-objects="saveDays($event)"
-    ></input-and-save>
-    -->
     <div
       class="flex flex-col md:flex-row pt-10 md:pt-28 pb-10 space-y-5 md:space-y-0 md:space-x-10"
     >

@@ -45,9 +45,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-.circle-number {
-  @apply mt-4 flex-shrink-0 w-8 h-8 font-bold text-lg text-white rounded-full bg-blue-500 flex items-center justify-center;
-}
-</style>

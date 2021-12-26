@@ -3,14 +3,22 @@
     <h1 class="pt-10 text-3xl font-bold text-blue-500">
       Restricciones de justicia
     </h1>
-    <div class="w-3/4 text-center space-y-3">
+    <div class="w-1/2 text-center space-y-3 text-sm">
       <div>
-        El problema tiene como supuesto que
-        <b>las personas pueden repetirse tareas durante la semana</b> y que
-        <b>pueden tener más de una tarea al día</b>, pero hay algunas preguntas
-        que debes responder para agregarle un poco de justicia a la asignación
-        🙌️
+        El problema tiene como supuestos que
       </div>
+      <ul class="list-disc list-inside">
+          <li>
+            <b>Las personas pueden repetirse tareas durante la semana</b>
+          </li>
+          <li>
+            <b>Una persona puede tener más de una tarea al día</b>
+          </li>
+        </ul>
+      <div>
+          Responde estas preguntas para agregarle un poco más de justicia a la
+          asignación 🙌️
+        </div>
       <div>
         Los números que insertes deben tener sentido. Por ejemplo, si la semana
         tiene 7 días y solo hay una persona haciendo una tarea, no tiene sentido

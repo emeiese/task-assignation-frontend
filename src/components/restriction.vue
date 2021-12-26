@@ -1,6 +1,6 @@
 <template>
   <div
-    class="border rounded-lg shadow-md p-8 flex flex-col space-y-3 w-3/4 items-center text-center text-xl"
+    class="border rounded-lg shadow-md p-8 flex flex-col space-y-3 w-3/4 items-center text-center"
   >
     <div class="flex flex-row items-center">
       <div class="flex flex-row items-center space-x-3">
@@ -15,9 +15,9 @@
     <span
       ><b>Ejemplo: </b> <i>{{ example }}</i></span
     >
-    <span class="text-xs text-gray-400">[<b>Tip:</b> {{ tipText }} ]</span>
+    <span class="text-xs text-gray-400"><b>Tip:</b> {{ tipText }} </span>
     <select
-      class="bg-white flex w-12 h-8 border-4 font-bold text-blue-500 rounded-md focus:ring"
+      class="bg-white flex w-14 h-8 border-4 font-bold text-blue-500 rounded-md focus:ring"
       @click="$emit('send-option', selectedValue)"
       v-model="selectedValue"
     >

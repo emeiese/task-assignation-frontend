@@ -7,28 +7,17 @@
         :warning="true"
       />
     </transition>
-    <input-and-save
-      id="namesInput"
-      upperString="Ingrese todas las personas que participan de las tareas, separadas por comas."
-      placeholder="Ej: Josefa, Tomás, Ignacio, María"
-      saveString="Ingresar personas"
-      @save-objects="saveNames($event)"
-    >
-    </input-and-save>
-    <input-and-save
-      id="tasksInput"
-      upperString="Ingrese todas las tareas a asignar, separadas por comas."
-      placeholder="Ej: lavar, cocinar, limpiar"
-      saveString="Ingresar tareas"
-      @save-objects="saveTasks($event)"
-    ></input-and-save>
-    <input-and-save
-      id="periodsInput"
-      upperString="Ingrese los días de la semana en los que las tareas se asignan a las personas"
-      placeholder="Ej: Lunes, Martes, Miércoles, Jueves, Viernes, Sábado, Domingo"
-      saveString="Ingresar días"
-      @save-objects="saveDays($event)"
-    ></input-and-save>
+    <div class="w-1/2 space-y-4">
+      <input-and-save
+        v-for="inputItem in inputsList"
+        :key="inputItem.id"
+        :id="inputItem.id"
+        :upperString="inputItem.upperString"
+        :placeholder="inputItem.placeholder"
+        :saveString="inputItem.saveString"
+        @save-objects="save({ type: inputItem.type, list: $event })"
+      />
+    </div>
     <div
       class="flex flex-col md:flex-row pt-10 md:pt-28 pb-10 space-y-5 md:space-y-0 md:space-x-10"
     >
@@ -106,6 +95,33 @@ export default {
       assignCosts: false,
       continueMessage: false,
       infactible: false,
+      inputsList: [
+        {
+          id: "1",
+          upperString:
+            "Ingrese todas las personas que participan de las tareas, separadas por comas.",
+          placeholder: "Ej: Josefa, Tomás, Ignacio, María",
+          saveString: "Ingresar personas",
+          type: "namesInput",
+        },
+        {
+          id: "2",
+          upperString:
+            "Ingrese todas las tareas a asignar, separadas por comas.",
+          placeholder: "Ej: lavar, cocinar, limpiar",
+          saveString: "Ingresar tareas",
+          type: "tasksInput",
+        },
+        {
+          id: "3",
+          upperString:
+            "Ingrese los períodos en los que las tareas se asignan a las personas.",
+          placeholder:
+            "Ej: Lunes, Martes, Miércoles, Jueves, Viernes, Sábado, Domingo",
+          saveString: "Ingresar días",
+          type: "daysInput",
+        },
+      ],
     };
   },
   methods: {
@@ -122,6 +138,17 @@ export default {
     saveDays(objects) {
       if (objects) {
         this.days = objects.split(",").map((day) => day.trim());
+      }
+    },
+    save(object) {
+      if (object.type == "namesInput") {
+        this.saveNames(object.list);
+      }
+      if (object.type == "tasksInput") {
+        this.saveTasks(object.list);
+      }
+      if (object.type == "daysInput") {
+        this.saveDays(object.list);
       }
     },
     triggerWarning() {

@@ -8,17 +8,17 @@
         El problema tiene como supuestos que
       </div>
       <ul class="list-disc list-inside">
-          <li>
-            <b>Las personas pueden repetirse tareas durante la semana</b>
-          </li>
-          <li>
-            <b>Una persona puede tener más de una tarea al día</b>
-          </li>
-        </ul>
+        <li>
+          <b>Las personas pueden repetirse tareas durante la semana</b>
+        </li>
+        <li>
+          <b>Una persona puede tener más de una tarea al día</b>
+        </li>
+      </ul>
       <div>
-          Responde estas preguntas para agregarle un poco más de justicia a la
-          asignación 🙌️
-        </div>
+        Responde estas preguntas para agregarle un poco más de justicia a la
+        asignación 🙌️
+      </div>
       <div>
         Los números que insertes deben tener sentido. Por ejemplo, si la semana
         tiene 7 días y solo hay una persona haciendo una tarea, no tiene sentido

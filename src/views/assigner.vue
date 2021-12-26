@@ -7,17 +7,16 @@
         :warning="true"
       />
     </transition>
-    <div
-     class="w-1/2 space-y-4">
+    <div class="w-1/2 space-y-4">
       <input-and-save
-      v-for="inputItem in inputsList"
-      :key="inputItem.id"
-      :id="inputItem.id"
-      :upperString="inputItem.upperString"
-      :placeholder="inputItem.placeholder"
-      :saveString="inputItem.saveString"
-      @save-objects="save({ type: inputItem.type, list: $event })"
-    />
+        v-for="inputItem in inputsList"
+        :key="inputItem.id"
+        :id="inputItem.id"
+        :upperString="inputItem.upperString"
+        :placeholder="inputItem.placeholder"
+        :saveString="inputItem.saveString"
+        @save-objects="save({ type: inputItem.type, list: $event })"
+      />
     </div>
     <div
       class="flex flex-col md:flex-row pt-10 md:pt-28 pb-10 space-y-5 md:space-y-0 md:space-x-10"

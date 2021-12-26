@@ -42,9 +42,9 @@
         </div>
       </div>
     </div>
-    <span>
+    <span class="px-5 text-xs items-center text-justify md:px-0 md:text-base md:w-3/4 md:text-center">
       Ten en cuenta que la suma de los costos para una persona debe ser de
-      exactamente {{ tasks.length }} o<b> no podrás continuar</b>:
+      exactamente {{ tasks.length }} o<b> no podrás continuar</b>
     </span>
     <button
       class="bg-transpareny font-semibold py-2 px-4 border rounded"
@@ -104,9 +104,18 @@ export default {
   },
   methods: {
     async checkCosts() {
-      let post = { costs: this.costs };
-      const response = await axios.post(this.apiLink + "/checkCosts/", post);
-      this.canContinue = response.data;
+      var go = true;
+      for (const tasks_costs of Object.values(this.costs)) {
+        const s = Object.values(tasks_costs).reduce((a, b) => a + b, 0)
+        if (!(s == this.tasks.length)){
+          go = false;
+          break;
+        }
+      }
+      this.canContinue = go;
+      // let post = { costs: this.costs };
+      // const response = await axios.post(this.apiLink + "/checkCosts/", post);
+      // this.canContinue = response.data;
     },
     async nextPage() {
       this.continueMessage = true;

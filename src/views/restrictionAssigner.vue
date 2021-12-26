@@ -3,7 +3,7 @@
     <h1 class="pt-10 text-3xl font-bold text-blue-500">
       Restricciones de justicia
     </h1>
-    <div class="w-1/2 text-center space-y-3 text-sm">
+    <div class="w-3/4 md:w-1/2 text-center space-y-3 text-sm">
       <div>
         El problema tiene como supuestos que
       </div>

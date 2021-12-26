@@ -8,7 +8,7 @@
       Asignación de tareas por día
     </h1>
     <div
-      class="md:w-1/3 divide-y grid grid-flow-row gap-2 rounded border-2 shadow-lg"
+      class="w-3/4 md:w-1/2 divide-y grid grid-flow-row gap-2 rounded border-2 shadow-lg"
     >
       <!-- Por cada task crea una fila -->
       <ul

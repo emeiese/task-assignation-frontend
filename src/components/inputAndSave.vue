@@ -1,6 +1,4 @@
 <template>
-  <!-- TODO: Modificar esto para que tenga un formato parecido al de las restricciones
-            es decir, que tenga numero y esté enmarcado en una caja.-->
   <div
     class="w-full m-2 p-2 border rounded-lg shadow-md flex flex-col items-center text-center"
   >

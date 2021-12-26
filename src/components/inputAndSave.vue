@@ -6,7 +6,7 @@
       <h1 class="text-center pt-5">
         {{ upperString }}
       </h1>
-      <div class="relative flex items-center md:w-1/2 flex-wrap items-stretch mb-3 pt-2">
+      <div class="relative flex items-center md:w-1/2 flex-wrap mb-3 pt-2">
         <input
           :id="id"
           type="text"

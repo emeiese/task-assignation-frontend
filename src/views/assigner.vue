@@ -33,7 +33,7 @@
       />
     </div>
     <div
-      class="flex flex-col md:flex-row pt-10 md:pt-28 pb-10 space-y-5 md:space-y-0 md:space-x-10"
+      class="flex flex-col md:flex-row pt-10 pb-10 space-y-5 md:space-y-0 md:space-x-10"
     >
       <div class="text-gray-700 flex flex-row items-center space-x-1">
         <input
@@ -42,31 +42,30 @@
           @click="uncheckRestrictions()"
         />
         <span class="ml-1"
-          >Deseo agregar
-          <span class="font-bold cursor-pointer">
+          >Agregar
+          <span class="font-bold">
             restricciones de justicia
           </span>
         </span>
         <img
           src="../assets/icons/information-circle.svg"
           alt="Information sign"
-          class="h-4 w-4 text-blue-600"
+          class="h-4 w-4 cursor-pointer"
           @click="showRestrictionInfo = true"
         />
       </div>
       <div class="text-gray-700 flex flex-row items-center space-x-1">
         <input type="checkbox" ref="costsSelected" @click="uncheckCosts()" />
         <span class="ml-1"
-          >Deseo agregar
-            <span class="font-bold cursor-pointer">
-              costos por cada tarea
-            </span>
-          para cada persona</span
-        >
+          >Agregar
+          <span class="font-bold">
+            costos por cada tarea
+          </span>
+        </span>
         <img
           src="../assets/icons/information-circle.svg"
           alt="Information sign"
-          class="h-4 w-4 text-blue-600"
+          class="h-4 w-4 cursor-pointer"
           @click="showCostsInfo = true"
         />
       </div>

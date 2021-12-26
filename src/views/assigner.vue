@@ -1,5 +1,19 @@
 <template>
   <div class="w-full flex flex-col px-4 md:px-0 md:m-5 items-center mx-auto">
+    <info-box
+      v-if="showRestrictionInfo"
+      infoString="Las restricciones de justicia permiten que las tareas se asignen de manera más justa entre todos
+            los participantes a través de los días. Si no seleccionas esta opción, puede que tus asignaciones sean un poco injustas 😮️"
+      titleString="Restricciones de Justicia"
+      @close="showRestrictionInfo = false"
+    />
+    <info-box
+      v-if="showCostsInfo"
+      infoString="Los costos por cada tarea por persona reflejan qué tanto le cuesta a cada persona hacer una tarea.
+            Si no seleccionas esta opción, se asignará costo 1 para cada tarea por defecto 👀️"
+      titleString="Asignación de Costos"
+      @close="showCostsInfo = false"
+    />
     <transition name="alert">
       <pop-box
         v-if="showWarning"
@@ -21,7 +35,7 @@
     <div
       class="flex flex-col md:flex-row pt-10 md:pt-28 pb-10 space-y-5 md:space-y-0 md:space-x-10"
     >
-      <label class="text-gray-700">
+      <div class="text-gray-700 flex flex-row items-center space-x-1">
         <input
           type="checkbox"
           ref="restrictionsSelected"
@@ -29,30 +43,33 @@
         />
         <span class="ml-1"
           >Deseo agregar
-          <Tooltip
-            text="Las restricciones de justicia permiten que las tareas se asignen de manera más justa entre todos los participantes a través de los días. Si no seleccionas esta opción, puede que tus asignaciones sean un poco injustas 😮️"
-          >
-            <span class="font-bold cursor-pointer">
-              restricciones de justicia
-            </span>
-          </Tooltip>
+          <span class="font-bold cursor-pointer">
+            restricciones de justicia
+          </span>
         </span>
-      </label>
-      <label class="text-gray-700">
+        <img
+          src="../assets/icons/information-circle.svg"
+          alt="Information sign"
+          class="h-4 w-4 text-blue-600"
+          @click="showRestrictionInfo = true"
+        />
+      </div>
+      <div class="text-gray-700 flex flex-row items-center space-x-1">
         <input type="checkbox" ref="costsSelected" @click="uncheckCosts()" />
         <span class="ml-1"
           >Deseo agregar
-          <Tooltip
-            text="Los costos por cada tarea por persona reflejan qué tanto le cuesta a cada persona hacer una tarea.
-            Si no seleccionas esta opción, se asignará costo 1 para cada tarea por defecto 👀️"
-          >
             <span class="font-bold cursor-pointer">
               costos por cada tarea
             </span>
-          </Tooltip>
           para cada persona</span
         >
-      </label>
+        <img
+          src="../assets/icons/information-circle.svg"
+          alt="Information sign"
+          class="h-4 w-4 text-blue-600"
+          @click="showCostsInfo = true"
+        />
+      </div>
     </div>
     <button
       class="bg-transparent hover:bg-blue-500 transition duration-500 ease-in-ou text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
@@ -79,14 +96,16 @@
 <script>
 import inputAndSave from "../components/inputAndSave.vue";
 import TheFooter from "../components/TheFooter.vue";
-import Tooltip from "../components/SimpleTooltip.vue";
 import popBox from "../components/popBox.vue";
 import axios from "axios";
+import InfoBox from "../components/infoBox.vue";
 
 export default {
-  components: { inputAndSave, TheFooter, Tooltip, popBox },
+  components: { inputAndSave, TheFooter, popBox, InfoBox },
   data() {
     return {
+      showRestrictionInfo: false,
+      showCostsInfo: false,
       names: false,
       tasks: false,
       days: false,

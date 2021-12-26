@@ -42,7 +42,7 @@
         </div>
       </div>
     </div>
-    <span>
+    <span class="px-5 text-xs items-center text-justify md:px-0 md:text-base md:w-3/4 md:text-center">
       Ten en cuenta que la suma de los costos para una persona debe ser de
       exactamente {{ tasks.length }} o<b> no podrás continuar</b>
     </span>

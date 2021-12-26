@@ -21,7 +21,7 @@
         :warning="true"
       />
     </transition>
-    <div class="w-1/2 space-y-4">
+    <div class="w-3/4 md:w-1/2 space-y-4">
       <input-and-save
         v-for="inputItem in inputsList"
         :key="inputItem.id"

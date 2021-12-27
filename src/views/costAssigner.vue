@@ -36,7 +36,6 @@
               v-for="option in options"
               :key="option.value"
               v-bind:value="option.value"
-              v-on:input="costs[name][task] = $event.target.value"
               >{{ option.value }}</option
             >
           </select>

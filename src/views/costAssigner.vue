@@ -27,7 +27,7 @@
         >
           Costo de {{ name }} por {{ task }}:
           <select
-            v-bind:value="costs[name][task]"
+            v-model="costs[name][task]"
             class="bg-white flex w-12 h-8 text-xs border  border-gray-200 text-blue-500 rounded-md focus:ring"
           >
             <option
@@ -115,7 +115,7 @@ export default {
         }
       }
       this.canContinue = go;
-      console.log(this.costs)
+      setTimeout(() => (this.canContinue = true), 2000);
       if (go === true) {
         this.nextPage()
       }

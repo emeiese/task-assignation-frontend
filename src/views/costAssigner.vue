@@ -29,6 +29,7 @@
           <select
             v-model.lazy="costs[name][task]"
             @click="checkCosts()"
+            @input="assign($event.target.value, {'name': name, 'task': task})"
             class="bg-white flex w-12 h-8 text-xs border  border-gray-200 text-blue-500 rounded-md focus:ring"
           >
             <option
@@ -36,6 +37,7 @@
               v-for="option in options"
               :key="option.value"
               v-bind:value="option.value"
+              @input="assign($event.target.value, {'name': name, 'task': task})"
               >{{ option.value }}</option
             >
           </select>
@@ -103,6 +105,9 @@ export default {
     };
   },
   methods: {
+    assign(value, args) {
+      this.costs[args['name']][args['task']] = value
+    },
     async checkCosts() {
       var go = true;
       for (const tasks_costs of Object.values(this.costs)) {

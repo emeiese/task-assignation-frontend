@@ -27,11 +27,10 @@
         >
           Costo de {{ name }} por {{ task }}:
           <select
-            v-model="costs[name][task]"
+            v-model.number="costs[name][task]"
             @click="checkCosts()"
             class="bg-white flex w-12 h-8 text-xs border  border-gray-200 text-blue-500 rounded-md focus:ring"
           >
-            <option disabled value="">Selecciona un valor</option>
             <option
               class="text-blue-300"
               v-for="option in options"

@@ -28,8 +28,6 @@
           Costo de {{ name }} por {{ task }}:
           <select
             v-bind:value="costs[name][task]"
-            v-on:input="costs[name][task] = $event.target.value"
-            @click="checkCosts()"
             class="bg-white flex w-12 h-8 text-xs border  border-gray-200 text-blue-500 rounded-md focus:ring"
           >
             <option
@@ -54,7 +52,7 @@
           ? 'hover:bg-blue-500 text-blue-700 hover:text-white border-blue-500 hover:border-transparent '
           : 'text-gray-400 border-gray-400 cursor-not-allowed'
       "
-      @click="nextPage()"
+      @click="checkCosts()"
       :disabled="!canContinue"
     >
       Continuar
@@ -117,6 +115,10 @@ export default {
         }
       }
       this.canContinue = go;
+      console.log(this.costs)
+      if (go === true) {
+        this.nextPage()
+      }
       // let post = { costs: this.costs };
       // const response = await axios.post(this.apiLink + "/checkCosts/", post);
       // this.canContinue = response.data;

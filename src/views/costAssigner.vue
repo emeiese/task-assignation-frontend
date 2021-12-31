@@ -36,6 +36,7 @@
               v-for="option in options"
               :key="option.value"
               v-bind:value="option.value"
+              @click="costs[name][task] = option.value"
               >{{ option.value }}</option
             >
           </select>

@@ -41,7 +41,9 @@
         </div>
       </div>
     </div>
-    <span class="px-5 text-xs items-center text-justify md:px-0 md:text-base md:w-3/4 md:text-center">
+    <span
+      class="px-5 text-xs items-center text-justify md:px-0 md:text-base md:w-3/4 md:text-center"
+    >
       Ten en cuenta que la suma de los costos para una persona debe ser de
       exactamente {{ tasks.length }} o<b> no podrás continuar</b>
     </span>
@@ -102,14 +104,11 @@ export default {
     };
   },
   methods: {
-    assign(value, args) {
-      this.costs[args['name']][args['task']] = value
-    },
     async checkCosts() {
       var go = true;
       for (const tasks_costs of Object.values(this.costs)) {
-        const s = Object.values(tasks_costs).reduce((a, b) => a + b, 0)
-        if (!(s == this.tasks.length)){
+        const s = Object.values(tasks_costs).reduce((a, b) => a + b, 0);
+        if (!(s == this.tasks.length)) {
           go = false;
           break;
         }
@@ -117,7 +116,7 @@ export default {
       this.canContinue = go;
       setTimeout(() => (this.canContinue = true), 2000);
       if (go === true) {
-        this.nextPage()
+        this.nextPage();
       }
       // let post = { costs: this.costs };
       // const response = await axios.post(this.apiLink + "/checkCosts/", post);

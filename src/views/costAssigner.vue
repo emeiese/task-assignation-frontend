@@ -8,19 +8,9 @@
     >
       <span>
         A continuación deberás asignar costos para cada persona por tarea 🙊️
-      </span>
-      <span>
         Mientras más alto sea el número que asignes, más costosa será esa tarea
         para la persona. El programa tratará de minimizar los costos de la gente
         en base a esta asignación.
-      </span>
-      <span>
-        Debes tener en cuenta la siguiente
-        <b>regla</b> o el programa no te permitirá continuar:
-      </span>
-      <span class="font-semibold text-red-300">
-        La suma de los costos para una persona debe ser de exactamente
-        {{ tasks.length }}
       </span>
       <span class="text-xs">
         Espera unos segundos mientras se cargan las opciones 😁️</span
@@ -38,7 +28,6 @@
           Costo de {{ name }} por {{ task }}:
           <select
             v-model="costs[name][task]"
-            @click="checkCosts()"
             class="bg-white flex w-12 h-8 text-xs border  border-gray-200 text-blue-500 rounded-md focus:ring"
           >
             <option
@@ -52,6 +41,12 @@
         </div>
       </div>
     </div>
+    <span
+      class="px-5 text-xs items-center text-justify md:px-0 md:text-base md:w-3/4 md:text-center"
+    >
+      Ten en cuenta que la suma de los costos para una persona debe ser de
+      exactamente {{ tasks.length }} o<b> no podrás continuar</b>
+    </span>
     <button
       class="bg-transpareny font-semibold py-2 px-4 border rounded"
       :class="
@@ -59,14 +54,19 @@
           ? 'hover:bg-blue-500 text-blue-700 hover:text-white border-blue-500 hover:border-transparent '
           : 'text-gray-400 border-gray-400 cursor-not-allowed'
       "
-      @click="nextPage()"
+      @click="checkCosts()"
       :disabled="!canContinue"
     >
       Continuar
     </button>
     <transition name="alert">
       <pop-box
-        v-if="continueMessage"
+        v-if="infactible"
+        message="Tu problema es infactible con los valores que insertaste 😢️, prueba con otros e inténtalo de nuevo."
+        :warning="true"
+      />
+      <pop-box
+        v-else-if="continueMessage"
         message="Espera unos segundos mientras te redirijo a la siguiente página..."
         :warning="false"
       />
@@ -100,16 +100,27 @@ export default {
           Object.fromEntries(this.tasks.map((y) => [y, 1])),
         ])
       ),
+      infactible: false,
     };
   },
   methods: {
     async checkCosts() {
-      let post = { costs: this.costs };
-      const response = await axios.post(
-        "https://8sdgtp.deta.dev/checkCosts/",
-        post
-      );
-      this.canContinue = response.data;
+      var go = true;
+      for (const tasks_costs of Object.values(this.costs)) {
+        const s = Object.values(tasks_costs).reduce((a, b) => a + b, 0);
+        if (!(s == this.tasks.length)) {
+          go = false;
+          break;
+        }
+      }
+      this.canContinue = go;
+      setTimeout(() => (this.canContinue = true), 2000);
+      if (go === true) {
+        this.nextPage();
+      }
+      // let post = { costs: this.costs };
+      // const response = await axios.post(this.apiLink + "/checkCosts/", post);
+      // this.canContinue = response.data;
     },
     async nextPage() {
       this.continueMessage = true;
@@ -122,7 +133,7 @@ export default {
             p: this.names.length,
           };
           const response = await axios.post(
-            "https://8sdgtp.deta.dev/get_restriction_options",
+            this.apiLink + "/get_restriction_options",
             post
           );
 
@@ -146,17 +157,18 @@ export default {
             days: this.days,
             costs: this.costs,
             min_assign_task: 1,
-            max_assign_task: 10000,
-            max_total_assign: 10000,
+            max_assign_task: false,
+            max_total_assign: false,
             min_total_assign: 1,
           };
 
           // Esto debería ser una función. Llamémosla function2()
           const response = await axios.post(
-            "https://8sdgtp.deta.dev/resolve/",
+            this.apiLink + "/resolve/",
             problemParams
           );
           if (response.data.status == "Optimal") {
+            // Cambiamos de página:
             this.$router.push({
               name: "Optimizer",
               params: {
@@ -164,9 +176,9 @@ export default {
               },
             });
           } else {
-            console.log(
-              "El problema es infactible con los valores que acabas de asignar. Prueba con otros e intentalo de nuevo :("
-            );
+            this.continueMessage = false;
+            this.infactible = true;
+            setTimeout(() => (this.infactible = false), 3000);
           }
         }
       }
@@ -174,10 +186,7 @@ export default {
   },
   async created() {
     let post = { tasks: this.tasks };
-    const response = await axios.post(
-      "https://8sdgtp.deta.dev/getOptions/",
-      post
-    );
+    const response = await axios.post(this.apiLink + "/getOptions/", post);
     this.options = response.data;
   },
 };

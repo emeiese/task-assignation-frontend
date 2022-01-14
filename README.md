@@ -9,7 +9,7 @@ En mi familia siempre nos costó mucho organizarnos para hacer las tareas de la 
 
 Partí programando todo lo que ahora es el backend en un Jupyter Notebook donde había que ingresar todo a mano y obligatoriamente tenía que correrlo yo (porque nadie más de mi familia sabía programar), así que al final me motivé a crearle un frontend y backend decentes que pudiese montar en un servidor, y así surgió este proyecto! 
 
-Puedes jugar con el asignador en [esta página](https://asignador-de-tareas.netlify.app/) (tenle paciencia porque el backend es medio lento jeje). Todavía no publico el código del backend, porque quiero revisarlo primero jeje, pero si quieres _early-access_ [me escribes](https://www.linkedin.com/in/mignaciasanchezj/) :) 
+La versión master del asignador está en [esta página](https://asignador-de-tareas.netlify.app/) (tenle paciencia porque el backend es medio lento jeje), mientras que la versión de staging [está aquí](https://staging--asignador-de-tareas.netlify.app/). El código del backend se encuentra en [este repo](https://github.com/emeiese/task-assignation-backend) 
 
 
 ## Project setup

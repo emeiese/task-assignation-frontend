@@ -3,15 +3,27 @@
     <h1 class="pt-10 text-3xl font-bold text-blue-500">
       Restricciones de justicia
     </h1>
-    <div class="w-3/4 text-center space-y-3">
+    <div class="w-3/4 md:w-1/2 text-center space-y-3 text-sm">
       <div>
-        El problema tiene como supuesto que
-      <b>las personas pueden repetirse tareas durante la semana</b> y que
-      <b>pueden tener más de una tarea al día</b>, pero hay algunas preguntas
-      que debes responder para agregarle un poco de justicia a la asignación de
-      tareas entre las distintas personas en los días que escogiste 🙌️
+        El problema tiene como supuestos que
       </div>
-      <div>Ten ojo al asignar estos valores! Los números que se inserten deben tener sentido. Por ejemplo, si la semana tiene 7 días y solo hay una persona haciendo una tarea, no tendría sentido pedir que el mínimo de asignaciones por tarea sea 8). </div>
+      <ul class="list-disc list-inside">
+        <li>
+          <b>Las personas pueden repetirse tareas durante la semana</b>
+        </li>
+        <li>
+          <b>Una persona puede tener más de una tarea al día</b>
+        </li>
+      </ul>
+      <div>
+        Responde estas preguntas para agregarle un poco más de justicia a la
+        asignación 🙌️
+      </div>
+      <div>
+        Los números que insertes deben tener sentido. Por ejemplo, si la semana
+        tiene 7 días y solo hay una persona haciendo una tarea, no tiene sentido
+        pedir que el mínimo de asignaciones por tarea sea 8.
+      </div>
     </div>
     <restriction
       v-for="rest in restrictionsList"
@@ -25,45 +37,32 @@
       :restrictionsOptions="restrictionsOptions[rest.id]"
       @send-option="saveValue({ valueName: rest.valueName, value: $event })"
     />
-    <!--
-    <router-link
-      class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
-      :to="{
-        path: '/optimize',
-        query: {
-          names: names,
-          tasks: tasks,
-          days: days,
-        },
-      }"
-    >
-      Continuar
-    </router-link>
-    -->
     <button
       class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
       @click="nextPage()"
     >
       Resolver problema
     </button>
-    <span v-if="continueMessage" class="text-xs">
-      Espera unos segundos mientras te dirijo a la siguiente página 😁️</span
-    >
-    <span v-else class="text-white text-xs">
-      Texto invisible! :O Felicidades por encontrarlo jeje</span
-    >
-    <div v-if="cantSolve">
-      El problema es infactible con los valores que acabas de asignar. Prueba
-      con otros valores e intentalo de nuevo 😔️.
-    </div>
-    <the-footer/>
+    <pop-box
+      v-if="infactible"
+      message="El problema es infactible con los valores que acabas de asignar. Prueba
+      con otros valores e inténtalo de nuevo 😔️"
+      :warning="true"
+    />
+    <pop-box
+      v-else-if="continueMessage"
+      message="Espera unos segundos mientras te redirijo a la siguiente página..."
+      :warning="false"
+    />
+    <the-footer />
   </div>
 </template>
 
 <script>
 import restriction from "../components/restriction.vue";
 import axios from "axios";
-import TheFooter from '../components/TheFooter.vue';
+import TheFooter from "../components/TheFooter.vue";
+import popBox from "../components/popBox.vue";
 export default {
   props: {
     names: Array,
@@ -74,10 +73,10 @@ export default {
     costs: Object,
     restrictionsOptions: Object,
   },
-  components: { restriction, TheFooter },
+  components: { restriction, TheFooter, popBox },
   methods: {
     async nextPage() {
-      this.continueMessage = true
+      this.continueMessage = true;
       let problemParams = {
         names: this.names,
         tasks: this.tasks,
@@ -91,7 +90,7 @@ export default {
 
       // Esto debería ser una función. Llamémosla function2()
       const response = await axios.post(
-        "https://8sdgtp.deta.dev/resolve/",
+        this.apiLink + "/resolve/",
         problemParams
       );
       if (response.data.status == "Optimal") {
@@ -103,7 +102,9 @@ export default {
           },
         });
       } else {
-        this.cantSolve = true;
+        this.continueMessage = false;
+        this.infactible = true;
+        setTimeout(() => (this.infactible = false), 3000);
       }
     },
     saveValue(object) {
@@ -113,11 +114,11 @@ export default {
   data() {
     return {
       continueMessage: false,
-      cantSolve: false,
+      infactible: false,
       selectedOptions: {
         min_assign_task: 1,
-        max_assign_task: 10000,
-        max_total_assign: 10000,
+        max_assign_task: false,
+        max_total_assign: false,
         min_total_assign: 1,
       },
       restrictionsList: [
@@ -127,30 +128,24 @@ export default {
           defaultValue: 1,
           headerText:
             "Ingresa el número mínimo de asignaciones que debe tener una persona en una tarea X durante la semana.",
-          example:
-            "El número mínimo de veces que " +
-            this.names[0] +
-            " debe lavar en la semana es 1.",
+          example: `El número mínimo de veces que ${this.names[0]} debe ${this.tasks[0]} en la semana es 1.`,
           tipText:
             "Ten cuidado con asignar un número muy alto o el problema podria no tener solución 😢️ ",
         },
         {
           id: "2",
           valueName: "max_assign_task",
-          defaultValue: 1000,
+          defaultValue: false,
           headerText:
             "Ingresa el número máximo de asignaciones que puede tener una persona en una tarea durante la semana.",
-          example:
-            "El número máximo de veces que " +
-            this.names[0] +
-            " debe lavar en la semana es 5.",
+          example: `El número máximo de veces que ${this.names[0]} debe ${this.tasks[0]} en la semana es 5.`,
           tipText:
             "Ten cuidado con asignar un número muy bajo o el problema podría no tener solución 😢️",
         },
         {
           id: "3",
           valueName: "max_total_assign",
-          defaultValue: 1000,
+          defaultValue: false,
           headerText:
             "Ingresa el número máximo de asignaciones totales  que puede tener una persona durante una semana.",
           example:

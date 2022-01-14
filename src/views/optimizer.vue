@@ -1,10 +1,14 @@
 <template>
-  <div class="w-full flex flex-col m-5 mb-24 items-center mx-auto space-y-7 md:space-y-10">
-    <h1 class="px-3 md: px-0 pt-10 text-center text-2xl md:text-3xl font-bold text-blue-500">
+  <div
+    class="w-full flex flex-col m-5 mb-24 items-center mx-auto space-y-7 md:space-y-10"
+  >
+    <h1
+      class="px-3 md:px-0 pt-10 text-center text-2xl md:text-3xl font-bold text-blue-500"
+    >
       Asignación de tareas por día
     </h1>
     <div
-      class="md:w-1/3 divide-y grid grid-flow-row gap-2 rounded border-2 shadow-lg"
+      class="w-3/4 md:w-1/2 divide-y grid grid-flow-row gap-2 rounded border-2 shadow-lg"
     >
       <!-- Por cada task crea una fila -->
       <ul
@@ -12,7 +16,9 @@
         :key="day"
         class="px-6 py-4"
       >
-        <h2 class="font-semibold text-lg text-blue-700 tracking-wide uppercase">{{ day }}</h2>
+        <h2 class="font-semibold text-lg text-blue-700 tracking-wide uppercase">
+          {{ day }}
+        </h2>
         <!-- Por cada día crea una columna -->
         <li
           v-for="(assigned, task) in dailyAssignation"
@@ -23,7 +29,7 @@
         </li>
       </ul>
     </div>
-    <div class="px-10 md:p-0 md:w-1/4 text-center" v-if="problemSettings.max_assign_task > 500">
+    <div class="px-10 md:p-0 md:w-1/4 text-center">
       <h1 class="font-semibold">Restricciones de justicia del problema:</h1>
       <ul class="text-left py-5 list-disc">
         <li>
@@ -32,7 +38,7 @@
           <span v-if="problemSettings.min_assign_task > 1">veces</span
           ><span v-else>vez</span> cada tarea en la semana.
         </li>
-        <li>
+        <li v-if="problemSettings.max_assign_task">
           Cada persona puede realizar a lo más
           {{ problemSettings.max_assign_task }}
           <span v-if="problemSettings.max_assign_task > 1">veces</span
@@ -46,7 +52,7 @@
           ><span v-else>tarea</span> cada semana.
         </li>
         -->
-        <li>
+        <li v-if="problemSettings.max_total_assign">
           Cada persona debe realizar a lo más
           {{ problemSettings.max_total_assign }}
           <span v-if="problemSettings.max_total_assign > 1">tareas</span
@@ -82,7 +88,7 @@ export default {
         p: this.problemSettings.names.length,
       };
       const response = await axios.post(
-        "https://8sdgtp.deta.dev/get_restriction_options",
+        this.apiLink + "/get_restriction_options",
         post
       );
 
